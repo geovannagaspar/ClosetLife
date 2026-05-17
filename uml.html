@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8"/>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>UML | ClosetLife</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- FONTES -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ÍCONES -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      ClosetLife
+    </div>
+
+    <nav class="menu">
+
+      <a href="index.html">
+        <i data-feather="grid"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="inventario.html">
+        <i data-feather="shopping-bag"></i>
+        <span>Inventário</span>
+      </a>
+
+      <a href="agenda.html">
+        <i data-feather="calendar"></i>
+        <span>Agenda</span>
+      </a>
+
+      <a href="favoritos.html">
+        <i data-feather="heart"></i>
+        <span>Favoritos</span>
+      </a>
+
+      <a href="financeiro.html">
+        <i data-feather="dollar-sign"></i>
+        <span>Financeiro</span>
+      </a>
+
+      <a href="documentacao.html">
+        <i data-feather="book-open"></i>
+        <span>Documentação</span>
+      </a>
+
+      <a
+        href="uml.html"
+        class="active"
+      >
+        <i data-feather="git-branch"></i>
+        <span>UML</span>
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <header class="topbar">
+
+      <div>
+
+        <h1>
+          UML • ClosetLife
+        </h1>
+
+        <p>
+          Modelagem e Arquitetura do Sistema
+        </p>
+
+      </div>
+
+    </header>
+
+    <!-- VISÃO GERAL -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        1. Visão Geral do Sistema
+      </h2>
+
+      <p style="line-height:1.9;">
+
+        O ClosetLife é um sistema web desenvolvido
+        para gerenciamento digital de roupas,
+        favoritos, agenda e organização pessoal.
+
+        O objetivo da modelagem UML é representar
+        visualmente a estrutura, os fluxos e
+        os componentes do sistema.
+
+      </p>
+
+    </section>
+
+    <!-- ESCOPO -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        Escopo da Modelagem
+      </h2>
+
+      <ul style="line-height:2; padding-left:20px;">
+
+        <li>Diagrama de Casos de Uso</li>
+
+        <li>Diagrama de Classes</li>
+
+        <li>Diagrama de Sequência</li>
+
+        <li>Diagrama de Atividade</li>
+
+        <li>Diagrama de Componentes</li>
+
+      </ul>
+
+    </section>
+
+    <!-- CASOS DE USO -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        2. Diagrama de Casos de Uso
+      </h2>
+
+      <div class="empty-state">
+
+        <p style="line-height:2;">
+
+          👤 Usuário <br><br>
+
+          • Adicionar roupas <br>
+          • Remover roupas <br>
+          • Favoritar peças <br>
+          • Visualizar agenda <br>
+          • Acessar financeiro <br>
+          • Gerenciar inventário <br>
+
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- CLASSES -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        3. Diagrama de Classes
+      </h2>
+
+      <div class="empty-state">
+
+        <h3 style="margin-bottom:15px;">
+          Classe: Roupa
+        </h3>
+
+        <p style="line-height:2;">
+
+          + nome <br>
+          + categoria <br>
+          + imagem <br>
+          + favorita <br>
+
+        </p>
+
+      </div>
+
+      <br>
+
+      <div class="empty-state">
+
+        <h3 style="margin-bottom:15px;">
+          Classe: Agenda
+        </h3>
+
+        <p style="line-height:2;">
+
+          + data <br>
+          + horário <br>
+          + evento <br>
+
+        </p>
+
+      </div>
+
+      <br>
+
+      <div class="empty-state">
+
+        <h3 style="margin-bottom:15px;">
+          Classe: Financeiro
+        </h3>
+
+        <p style="line-height:2;">
+
+          + valor <br>
+          + categoria <br>
+          + descrição <br>
+
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- SEQUÊNCIA -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        4. Diagrama de Sequência
+      </h2>
+
+      <div class="empty-state">
+
+        <p style="line-height:2;">
+
+          Usuário adiciona roupa <br>
+          ↓ <br>
+          Interface recebe dados <br>
+          ↓ <br>
+          JavaScript processa <br>
+          ↓ <br>
+          LocalStorage salva <br>
+          ↓ <br>
+          Inventário atualiza <br>
+
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- ATIVIDADE -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        5. Diagrama de Atividade
+      </h2>
+
+      <div class="empty-state">
+
+        <p style="line-height:2;">
+
+          Início <br>
+          ↓ <br>
+          Usuário acessa sistema <br>
+          ↓ <br>
+          Escolhe funcionalidade <br>
+          ↓ <br>
+          Adiciona roupa <br>
+          ↓ <br>
+          Sistema salva alterações <br>
+          ↓ <br>
+          Fim <br>
+
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- COMPONENTES -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        6. Diagrama de Componentes
+      </h2>
+
+      <table style="width:100%; line-height:2;">
+
+        <tr>
+
+          <td>
+            <strong>Componente</strong>
+          </td>
+
+          <td>
+            <strong>Tecnologia</strong>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>Frontend</td>
+
+          <td>HTML5 + CSS3</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Lógica</td>
+
+          <td>JavaScript</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Armazenamento</td>
+
+          <td>LocalStorage</td>
+
+        </tr>
+
+      </table>
+
+    </section>
+
+    <!-- CONTEXTO -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        7. Diagrama de Contexto do Sistema
+      </h2>
+
+      <div class="empty-state">
+
+<pre style="text-align:left; line-height:2; white-space:pre-wrap;">
+
+<<person>>
+👤 Usuário
+Pessoa que utiliza o ClosetLife para
+organizar roupas e favoritos.
+
+<<person>>
+🛍️ Cliente
+Usuário que gerencia seu closet digital.
+
+<<person>>
+⚙️ Administrador
+Responsável pela manutenção do sistema.
+
+<<container>>
+🖥️ Aplicação Web
+[HTML5/CSS3/JavaScript]
+Interface principal acessada pelo navegador.
+
+<<container>>
+⚙️ Sistema de Lógica
+[JavaScript]
+Responsável pelas funcionalidades do sistema.
+
+<<container_db>>
+💾 LocalStorage
+[Browser Storage]
+Armazena roupas, favoritos e agenda.
+
+📦 ClosetLife System
+[SYSTEM]
+
+Utiliza
+[HTML/CSS]
+
+Gerencia
+[JavaScript]
+
+Armazena
+[LocalStorage]
+
+Renderiza Interface
+[DOM]
+
+Atualiza Dados
+[JSON]
+
+</pre>
+
+      </div>
+
+    </section>
+
+    <!-- RESUMO -->
+
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        8. Resumo da Modelagem UML
+      </h2>
+
+      <table style="width:100%; line-height:2;">
+
+        <tr>
+
+          <td>
+            <strong>Diagrama</strong>
+          </td>
+
+          <td>
+            <strong>Objetivo</strong>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>Casos de Uso</td>
+
+          <td>Representar funcionalidades</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Classes</td>
+
+          <td>Estrutura do sistema</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Sequência</td>
+
+          <td>Fluxo das operações</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Atividade</td>
+
+          <td>Fluxos do sistema</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Componentes</td>
+
+          <td>Arquitetura geral</td>
+
+        </tr>
+
+      </table>
+
+    </section>
+
+    <!-- BENEFÍCIOS -->
+
+    <section class="card">
+
+      <h2 style="margin-bottom:18px;">
+        Benefícios da UML
+      </h2>
+
+      <ul style="line-height:2; padding-left:20px;">
+
+        <li>Melhor organização do projeto</li>
+
+        <li>Facilidade de manutenção</li>
+
+        <li>Documentação visual do sistema</li>
+
+        <li>Maior clareza na estrutura</li>
+
+        <li>Facilidade para futuras melhorias</li>
+
+      </ul>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  feather.replace();
+</script>
+
+</body>
+</html>

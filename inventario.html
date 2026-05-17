@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Inventário | ClosetLife</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- FONTES -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ÍCONES -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      ClosetLife
+    </div>
+
+    <nav class="menu">
+
+      <a href="index.html">
+        <i data-feather="grid"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        href="inventario.html"
+        class="active"
+      >
+        <i data-feather="shopping-bag"></i>
+        <span>Inventário</span>
+      </a>
+
+      <a href="agenda.html">
+        <i data-feather="calendar"></i>
+        <span>Agenda</span>
+      </a>
+
+      <a href="favoritos.html">
+        <i data-feather="heart"></i>
+        <span>Favoritos</span>
+      </a>
+
+      <a href="financeiro.html">
+        <i data-feather="dollar-sign"></i>
+        <span>Financeiro</span>
+      </a>
+
+      <a href="documentacao.html">
+        <i data-feather="book-open"></i>
+        <span>Documentação</span>
+      </a>
+
+      <a href="uml.html">
+        <i data-feather="git-branch"></i>
+        <span>UML</span>
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <!-- TOPO -->
+
+    <header class="topbar">
+
+      <div>
+
+        <h1>
+          Inventário
+        </h1>
+
+        <p>
+          Todas as suas peças cadastradas
+        </p>
+
+      </div>
+
+    </header>
+
+    <!-- PESQUISA -->
+
+    <input
+      type="text"
+      id="busca"
+      class="search-input"
+      placeholder="Pesquisar peça..."
+    >
+
+    <!-- GRID -->
+
+    <div
+      class="closet-grid"
+      id="inventarioGrid"
+    ></div>
+
+  </main>
+
+</div>
+
+<script>
+
+  feather.replace();
+
+  function pegarRoupas(){
+
+    return JSON.parse(
+      localStorage.getItem('roupas')
+    ) || [];
+
+  }
+
+  function renderizarInventario(){
+
+    const grid =
+      document.getElementById(
+        'inventarioGrid'
+      );
+
+    const busca =
+      document.getElementById(
+        'busca'
+      ).value.toLowerCase();
+
+    const roupas =
+      pegarRoupas().filter(r =>
+        r.nome
+        .toLowerCase()
+        .includes(busca)
+      );
+
+    grid.innerHTML = '';
+
+    if(roupas.length === 0){
+
+      grid.innerHTML = `
+
+        <div class="empty-state">
+
+          <h2>
+            Nenhuma peça encontrada
+          </h2>
+
+          <p style="margin-top:10px;">
+            Tente pesquisar outro nome.
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    roupas.forEach((roupa) => {
+
+      const card =
+        document.createElement('div');
+
+      card.classList.add('item-card');
+
+      card.innerHTML = `
+
+        <img src="${roupa.imagem}">
+
+        <div class="item-content">
+
+          <h3>
+            ${roupa.nome}
+          </h3>
+
+          <div class="item-category">
+            ${roupa.categoria}
+          </div>
+
+        </div>
+
+      `;
+
+      grid.appendChild(card);
+
+    });
+
+  }
+
+  document
+    .getElementById('busca')
+    .addEventListener(
+      'input',
+      renderizarInventario
+    );
+
+  renderizarInventario();
+
+</script>
+
+</body>
+</html>

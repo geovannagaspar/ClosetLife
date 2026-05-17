@@ -49,11 +49,18 @@ function pegarRoupas(){
     localStorage.getItem('roupas')
   );
 
-  if(roupasSalvas){
+  /* SE JÁ EXISTIREM ROUPAS */
+
+  if(
+    roupasSalvas &&
+    roupasSalvas.length > 0
+  ){
 
     return roupasSalvas;
 
   }
+
+  /* ROUPAS PADRÃO */
 
   const roupasPadrao = [
 

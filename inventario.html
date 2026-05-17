@@ -124,101 +124,12 @@
 
 </div>
 
+<script src="script.js"></script>
 <script>
-
-  feather.replace();
-
-  function pegarRoupas(){
-
-    return JSON.parse(
-      localStorage.getItem('roupas')
-    ) || [];
-
-  }
-
-  function renderizarInventario(){
-
-    const grid =
-      document.getElementById(
-        'inventarioGrid'
-      );
-
-    const busca =
-      document.getElementById(
-        'busca'
-      ).value.toLowerCase();
-
-    const roupas =
-      pegarRoupas().filter(r =>
-        r.nome
-        .toLowerCase()
-        .includes(busca)
-      );
-
-    grid.innerHTML = '';
-
-    if(roupas.length === 0){
-
-      grid.innerHTML = `
-
-        <div class="empty-state">
-
-          <h2>
-            Nenhuma peça encontrada
-          </h2>
-
-          <p style="margin-top:10px;">
-            Tente pesquisar outro nome.
-          </p>
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-    roupas.forEach((roupa) => {
-
-      const card =
-        document.createElement('div');
-
-      card.classList.add('item-card');
-
-      card.innerHTML = `
-
-        <img src="${roupa.imagem}">
-
-        <div class="item-content">
-
-          <h3>
-            ${roupa.nome}
-          </h3>
-
-          <div class="item-category">
-            ${roupa.categoria}
-          </div>
-
-        </div>
-
-      `;
-
-      grid.appendChild(card);
-
-    });
-
-  }
-
-  document
-    .getElementById('busca')
-    .addEventListener(
-      'input',
-      renderizarInventario
-    );
-
-  renderizarInventario();
-
+  feather.replace( );
+  document.addEventListener(\'DOMContentLoaded\', () => {
+    renderizarInventario();
+  );
 </script>
 
 </body>

@@ -193,5 +193,6 @@ function limparFormulario() {
 INIT
 ===================================== */
 document.addEventListener('DOMContentLoaded', () => {
+  pegarRoupas(); // Garante que o localStorage seja inicializado com as roupas padrão
   renderizar();
 });

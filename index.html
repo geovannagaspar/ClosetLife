@@ -1,119 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ClosetLife</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- FONTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-  <!-- ÍCONES -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventário | ClosetLife</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/feather-icons"></script>
-
-  <!-- ALERTAS -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <style>
-    /* Estilo para a tela de login que cobre tudo no início */
-    #tela-login {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #1c1c1f; /* Cor escura do seu tema */
-      display: flex; justify-content: center; align-items: center;
-      z-index: 10000; /* Fica acima de tudo, inclusive do splash */
-    }
-    .login-box {
-      background: #252529; padding: 40px; border-radius: 15px;
-      border: 1px solid #c8a97e; text-align: center; width: 320px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5 );
-    }
-    .login-input {
-      width: 100%; padding: 12px; margin-bottom: 15px; 
-      border-radius: 5px; border: 1px solid #444; 
-      background: #1c1c1f; color: white; outline: none;
-    }
-    .login-input:focus { border-color: #c8a97e; }
-  </style>
 </head>
-
 <body>
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="logo">ClosetLife</div>
+    <nav class="menu">
+      <a href="index.html"><i data-feather="grid"></i><span>Dashboard</span></a>
+      <a href="inventario.html" class="active"><i data-feather="shopping-bag"></i><span>Inventário</span></a>
+      <a href="agenda.html"><i data-feather="calendar"></i><span>Agenda</span></a>
+      <a href="favoritos.html"><i data-feather="heart"></i><span>Favoritos</span></a>
+      <a href="financeiro.html"><i data-feather="dollar-sign"></i><span>Financeiro</span></a>
+      <a href="documentacao.html"><i data-feather="book-open"></i><span>Documentação</span></a>
+      <a href="uml.html"><i data-feather="git-branch"></i><span>UML</span></a>
+    </nav>
+  </aside>
 
-  <!-- 1. TELA DE LOGIN (Aparece primeiro) -->
-  <div id="tela-login">
-    <div class="login-box">
-      <h1 style="color: #c8a97e; font-family: 'Cormorant Garamond', serif; margin-bottom: 10px;">ClosetLife</h1>
-      <p style="color: #ccc; margin-bottom: 25px; font-size: 14px;">Acesse seu closet digital</p>
-      
-      <input type="password" id="senhaInput" class="login-input" placeholder="Digite a senha (1234)">
-      
-      <button onclick="verificarLogin()" class="lux-btn" style="width: 100%; cursor: pointer;">
-        Entrar
-      </button>
-      
-      <p id="erroLogin" style="color: #ff4d4d; font-size: 12px; margin-top: 15px; display: none;">
-        Senha incorreta. Tente novamente!
-      </p>
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <h1>Inventário</h1>
+        <p>Todas as suas peças cadastradas</p>
+      </div>
+    </header>
+
+    <!-- FORMULÁRIO DE CADASTRO -->
+    <div class="card" style="margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 25px;">
+            <div style="width: 55px; height: 55px; border-radius: 18px; background: linear-gradient(135deg, #a7bfd3, #c8a27c ); display: flex; align-items: center; justify-content: center; color: white;">
+                <i data-feather="plus"></i>
+            </div>
+            <div>
+                <h2 style="font-size: 28px; margin-bottom: 4px;">Nova Peça</h2>
+                <p style="color: var(--soft);">Adicione um novo item ao seu closet</p>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="text" id="nomePeca" placeholder="Nome da peça" class="search-input">
+            <select id="categoriaPeca" class="search-input">
+                <option value="">Categoria</option>
+                <option value="Camisa">Camisa</option>
+                <option value="Calça">Calça</option>
+                <option value="Calçado">Calçado</option>
+                <option value="Bolsa">Bolsa</option>
+                <option value="Acessório">Acessório</option>
+            </select>
+        </div>
+        <input type="text" id="imagemPeca" placeholder="Link da imagem (URL)" class="search-input">
+        <button onclick="adicionarPeca()" class="add-btn" style="width: 100%;">+ Adicionar ao Inventário</button>
     </div>
-  </div>
 
-  <!-- 2. SPLASH SCREEN (Aparece depois do login) -->
-  <div id="splash">
-    <div class="splash-content">
-      <h1>ClosetLife</h1>
-      <p>Seu closet digital</p>
-    </div>
-  </div>
+    <input type="text" id="busca" class="search-input" placeholder="Pesquisar peça..." onkeyup="filtrarRoupas()">
+    <div class="closet-grid" id="inventarioGrid"></div>
+  </main>
+</div>
 
-  <!-- 3. HOME MENU -->
-  <div class="home-menu">
-    <h1 class="home-logo">ClosetLife</h1>
-    <p class="home-subtitle">Seu closet digital</p>
-
-    <!-- BOTÕES PRINCIPAIS -->
-    <div class="home-buttons">
-      <a href="inventario.html" class="lux-btn">Inventário</a>
-      <a href="agenda.html" class="lux-btn">Agenda</a>
-      <a href="favoritos.html" class="lux-btn">Favoritos</a>
-      <a href="financeiro.html" class="lux-btn">Financeiro</a>
-    </div>
-
-    <!-- BOTÕES SECUNDÁRIOS -->
-    <div class="home-buttons" style="margin-top:25px;">
-      <a href="documentacao.html" class="lux-btn">Documentação</a>
-      <a href="uml.html" class="lux-btn">UML</a>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script>
+<script src="script.js"></script>
+<script>
     feather.replace();
 
-    // Função simples de login para a apresentação
-    function verificarLogin() {
-      const senha = document.getElementById('senhaInput').value;
-      
-      if (senha === "1234") {
-        // Se a senha estiver certa, removemos a tela de login
-        document.getElementById('tela-login').style.display = 'none';
+    function adicionarPeca() {
+        const nome = document.getElementById('nomePeca').value;
+        const categoria = document.getElementById('categoriaPeca').value;
+        const imagem = document.getElementById('imagemPeca').value || 'https://via.placeholder.com/300?text=Sem+Imagem';
+
+        if (!nome || !categoria ) {
+            alert('Preencha o nome e a categoria.');
+            return;
+        }
+
+        const lista = pegarRoupas();
+        lista.push({ nome, categoria, imagem, favorita: false });
+        localStorage.setItem('roupas', JSON.stringify(lista));
         
-        // Opcional: Avisar o sistema que o usuário logou (para não pedir senha de novo nesta sessão)
-        sessionStorage.setItem('logado', 'sim');
-      } else {
-        // Se estiver errada, mostra o erro
-        document.getElementById('erroLogin').style.display = 'block';
-      }
+        document.getElementById('nomePeca').value = '';
+        document.getElementById('categoriaPeca').value = '';
+        document.getElementById('imagemPeca').value = '';
+
+        renderizar();
+        alert('Peça adicionada!');
     }
 
-    // Se o usuário já logou antes nesta sessão, não pede senha de novo
-    if (sessionStorage.getItem('logado') === 'sim') {
-      document.getElementById('tela-login').style.display = 'none';
+    function filtrarRoupas() {
+        const termo = document.getElementById('busca').value.toLowerCase();
+        const roupas = pegarRoupas();
+        const filtradas = roupas.filter(r => r.nome.toLowerCase().includes(termo) || r.categoria.toLowerCase().includes(termo));
+        renderizarCustom(filtradas);
     }
-  </script>
+
+    function renderizarCustom(lista) {
+        const grid = document.getElementById('inventarioGrid');
+        grid.innerHTML = lista.length ? '' : '<div class="empty-state"><h2>Nada encontrado</h2></div>';
+        lista.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.classList.add('item-card');
+            card.innerHTML = `
+                <img src="${item.imagem}" onerror="this.src='https://via.placeholder.com/150?text=Erro'">
+                <div class="item-content">
+                    <div style="display:flex; justify-content:space-between;">
+                        <h3>${item.nome}</h3>
+                        <button onclick="favoritar(${index} )" style="border:none; background:none; cursor:pointer;">${item.favorita ? '❤️' : '🤍'}</button>
+                    </div>
+                    <p>${item.categoria}</p>
+                    <button onclick="removerPeca(${index})" class="remove-btn" style="margin-top:10px; border-radius:10px;">Remover</button>
+                </div>`;
+            grid.appendChild(card);
+        });
+    }
+</script>
 </body>
 </html>

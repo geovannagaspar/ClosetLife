@@ -2,29 +2,16 @@
 <html lang="pt-br">
 
 <head>
-
   <meta charset="UTF-8"/>
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ClosetLife</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css"/>
 
   <!-- FONTES -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
   <!-- ÍCONES -->
   <script src="https://unpkg.com/feather-icons"></script>
@@ -32,100 +19,101 @@
   <!-- ALERTAS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <style>
+    /* Estilo para a tela de login que cobre tudo no início */
+    #tela-login {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #1c1c1f; /* Cor escura do seu tema */
+      display: flex; justify-content: center; align-items: center;
+      z-index: 10000; /* Fica acima de tudo, inclusive do splash */
+    }
+    .login-box {
+      background: #252529; padding: 40px; border-radius: 15px;
+      border: 1px solid #c8a97e; text-align: center; width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5 );
+    }
+    .login-input {
+      width: 100%; padding: 12px; margin-bottom: 15px; 
+      border-radius: 5px; border: 1px solid #444; 
+      background: #1c1c1f; color: white; outline: none;
+    }
+    .login-input:focus { border-color: #c8a97e; }
+  </style>
 </head>
 
 <body>
 
-  <!-- SPLASH SCREEN -->
-
-  <div id="splash">
-
-    <div class="splash-content">
-
-      <h1>ClosetLife</h1>
-
-      <p>
-        Seu closet digital
+  <!-- 1. TELA DE LOGIN (Aparece primeiro) -->
+  <div id="tela-login">
+    <div class="login-box">
+      <h1 style="color: #c8a97e; font-family: 'Cormorant Garamond', serif; margin-bottom: 10px;">ClosetLife</h1>
+      <p style="color: #ccc; margin-bottom: 25px; font-size: 14px;">Acesse seu closet digital</p>
+      
+      <input type="password" id="senhaInput" class="login-input" placeholder="Digite a senha (1234)">
+      
+      <button onclick="verificarLogin()" class="lux-btn" style="width: 100%; cursor: pointer;">
+        Entrar
+      </button>
+      
+      <p id="erroLogin" style="color: #ff4d4d; font-size: 12px; margin-top: 15px; display: none;">
+        Senha incorreta. Tente novamente!
       </p>
-
     </div>
-
   </div>
 
-  <!-- HOME -->
+  <!-- 2. SPLASH SCREEN (Aparece depois do login) -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1>ClosetLife</h1>
+      <p>Seu closet digital</p>
+    </div>
+  </div>
 
+  <!-- 3. HOME MENU -->
   <div class="home-menu">
-
-    <h1 class="home-logo">
-      ClosetLife
-    </h1>
-
-    <p class="home-subtitle">
-      Seu closet digital
-    </p>
+    <h1 class="home-logo">ClosetLife</h1>
+    <p class="home-subtitle">Seu closet digital</p>
 
     <!-- BOTÕES PRINCIPAIS -->
-
     <div class="home-buttons">
-
-      <a
-        href="inventario.html"
-        class="lux-btn"
-      >
-        Inventário
-      </a>
-
-      <a
-        href="agenda.html"
-        class="lux-btn"
-      >
-        Agenda
-      </a>
-
-      <a
-        href="favoritos.html"
-        class="lux-btn"
-      >
-        Favoritos
-      </a>
-
-      <a
-        href="financeiro.html"
-        class="lux-btn"
-      >
-        Financeiro
-      </a>
-
+      <a href="inventario.html" class="lux-btn">Inventário</a>
+      <a href="agenda.html" class="lux-btn">Agenda</a>
+      <a href="favoritos.html" class="lux-btn">Favoritos</a>
+      <a href="financeiro.html" class="lux-btn">Financeiro</a>
     </div>
 
     <!-- BOTÕES SECUNDÁRIOS -->
-
-    <div
-      class="home-buttons"
-      style="margin-top:25px;"
-    >
-
-      <a
-        href="documentacao.html"
-        class="lux-btn"
-      >
-        Documentação
-      </a>
-
-      <a
-        href="uml.html"
-        class="lux-btn"
-      >
-        UML
-      </a>
-
+    <div class="home-buttons" style="margin-top:25px;">
+      <a href="documentacao.html" class="lux-btn">Documentação</a>
+      <a href="uml.html" class="lux-btn">UML</a>
     </div>
-
   </div>
 
   <script src="script.js"></script>
   <script>
-    feather.replace( );
+    feather.replace();
+
+    // Função simples de login para a apresentação
+    function verificarLogin() {
+      const senha = document.getElementById('senhaInput').value;
+      
+      if (senha === "1234") {
+        // Se a senha estiver certa, removemos a tela de login
+        document.getElementById('tela-login').style.display = 'none';
+        
+        // Opcional: Avisar o sistema que o usuário logou (para não pedir senha de novo nesta sessão)
+        sessionStorage.setItem('logado', 'sim');
+      } else {
+        // Se estiver errada, mostra o erro
+        document.getElementById('erroLogin').style.display = 'block';
+      }
+    }
+
+    // Se o usuário já logou antes nesta sessão, não pede senha de novo
+    if (sessionStorage.getItem('logado') === 'sim') {
+      document.getElementById('tela-login').style.display = 'none';
+    }
   </script>
 </body>
 </html>

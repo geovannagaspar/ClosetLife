@@ -1,198 +1,103 @@
+// ==========================================
+// 1. CONFIGURAÇÕES E VARIÁVEIS GERAIS
+// ==========================================
+const closetGrid = document.getElementById('closetGrid') || document.getElementById('inventarioGrid');
+const totalRoupas = document.getElementById('totalRoupas');
+
+// Elementos do Modal (Usados apenas na página de cadastro)
 const modal = document.getElementById('modalOverlay');
 const abrirModal = document.getElementById('abrirModal');
 const fecharModal = document.getElementById('fecharModal');
-const salvarRoupa = document.getElementById('salvarRoupa');
-const closetGrid = document.getElementById('closetGrid');
-const totalRoupas = document.getElementById('totalRoupas');
-const totalCategorias = document.getElementById('totalCategorias');
 
-/* =====================================
-CLASSE POO
-===================================== */
-class Roupa {
-  constructor(nome, categoria, imagem) {
-    this.nome = nome;
-    this.categoria = categoria;
-    this.imagem = imagem;
-    this.favorita = false;
-  }
-}
-
-/* =====================================
-STORAGE
-===================================== */
+// ==========================================
+// 2. FUNÇÃO PARA BUSCAR OS DADOS (STORAGE)
+// ==========================================
 function pegarRoupas() {
-  const roupasSalvas = JSON.parse(localStorage.getItem('roupas'));
+    // Truque para limpar erros de versões antigas do site
+    if (localStorage.getItem('versao') !== '2.0') {
+        localStorage.clear();
+        localStorage.setItem('versao', '2.0');
+    }
 
-  if (roupasSalvas && roupasSalvas.length > 0) {
-    return roupasSalvas;
-  }
+    let lista = JSON.parse(localStorage.getItem('roupas'));
 
-  const roupasPadrao = [
-    { nome: "Baby Tee", categoria: "Camisa", imagem: "./img/baby.jpg", favorita: false },
-    { nome: "Baby Tee 2", categoria: "Camisa", imagem: "./img/baby2.jpg", favorita: false },
-    { nome: "Bolsa Baguette", categoria: "Bolsa", imagem: "./img/bolsa.jpg", favorita: false },
-    { nome: "Bolsa Baguette 2", categoria: "Bolsa", imagem: "./img/bolsa1.jpg", favorita: false },
-    { nome: "Calça Wide Leg", categoria: "Calça", imagem: "./img/calca.jpg", favorita: false },
-    { nome: "Calça Masculina", categoria: "Calça", imagem: "./img/calcamasculina.jpg", favorita: false },
-    { nome: "Camisa de Linho", categoria: "Camisa", imagem: "./img/camisa.jpg", favorita: false },
-    { nome: "Camisa de Linho 2", categoria: "Camisa", imagem: "./img/camisa1.jpg", favorita: false },
-    { nome: "Camisa Masculina", categoria: "Camisa", imagem: "./img/camisamasculina.jpg", favorita: false },
-    { nome: "Camisa Masculina 2", categoria: "Camisa", imagem: "./img/camisamascu.jpg", favorita: false },
-    { nome: "Tênis Retrô Adidas Samba", categoria: "Sapato", imagem: "./img/tenis.jpg", favorita: false },
-    { nome: "Tênis Retrô Adidas Samba 2", categoria: "Sapato", imagem: "./img/tenis1.jpg", favorita: false }
-  ];
-
-  localStorage.setItem('roupas', JSON.stringify(roupasPadrao));
-  return roupasPadrao;
+    // Se a lista estiver vazia, criamos as roupas padrão
+    if (!lista || lista.length === 0) {
+        lista = [
+            { nome: "Baby Tee", categoria: "Camisa", imagem: "img/baby.jpg", favorita: false },
+            { nome: "Baby Tee 2", categoria: "Camisa", imagem: "img/baby2.jpg", favorita: false },
+            { nome: "Bolsa Baguette", categoria: "Bolsa", imagem: "img/bolsa.jpg", favorita: false },
+            { nome: "Calça Wide Leg", categoria: "Calça", imagem: "img/calca.jpg", favorita: false },
+            { nome: "Camisa de Linho", categoria: "Camisa", imagem: "img/camisa.jpg", favorita: false },
+            { nome: "Camisa Masculina", categoria: "Camisa", imagem: "img/camisamascu.jpg", favorita: false },
+            { nome: "Tênis Adidas Samba", categoria: "Sapato", imagem: "img/tenis.jpg", favorita: false }
+        ];
+        localStorage.setItem('roupas', JSON.stringify(lista));
+    }
+    return lista;
 }
 
-function salvarRoupasStorage(lista) {
-  localStorage.setItem('roupas', JSON.stringify(lista));
-}
-
-/* =====================================
-MODAL
-===================================== */
-abrirModal.addEventListener('click', () => {
-  modal.style.display = 'flex';
-});
-
-fecharModal.addEventListener('click', fechar);
-
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    fechar();
-  }
-});
-
-function fechar() {
-  modal.style.display = 'none';
-}
-
-/* =====================================
-RENDER
-===================================== */
+// ==========================================
+// 3. FUNÇÃO PARA DESENHAR NA TELA (RENDER)
+// ==========================================
 function renderizar() {
-  const roupas = pegarRoupas();
-  closetGrid.innerHTML = '';
-
-  totalRoupas.textContent = roupas.length;
-
-  const categorias = [...new Set(roupas.map(r => r.categoria))];
-  totalCategorias.textContent = categorias.length;
-
-  if (roupas.length === 0) {
-    closetGrid.innerHTML = `
-      <div class="empty-state">
-        <h3>Seu closet está vazio</h3>
-        <p>Adicione sua primeira peça.</p>
-      </div>
-    `;
-    return;
-  }
-
-  roupas.forEach((roupa, index) => {
-    const card = document.createElement('div');
-    card.classList.add('item-card');
-
-    card.innerHTML = `
-      <img src="${roupa.imagem}">
-      <div class="item-content">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h3>${roupa.nome}</h3>
-          <button onclick="favoritarRoupa(${index})"
-            style="border:none; background:none; cursor:pointer; font-size:22px;">
-            ${roupa.favorita ? '❤️' : '🤍'}
-          </button>
-        </div>
-        <div class="item-category">${roupa.categoria}</div>
-      </div>
-      <button class="remove-btn" onclick="removerRoupa(${index})">Remover</button>
-    `;
-
-    closetGrid.appendChild(card);
-  });
-}
-
-/* =====================================
-SALVAR ROUPA
-===================================== */
-salvarRoupa.addEventListener('click', () => {
-  const nome = document.getElementById('nomeRoupa').value;
-  const categoria = document.getElementById('categoriaRoupa').value;
-  const imagemInput = document.getElementById('imagemRoupa');
-  const arquivo = imagemInput.files[0];
-
-  if (!nome || !categoria || !arquivo) {
-    Swal.fire({
-      title: 'Oops!',
-      text: 'Preencha todos os campos.',
-      icon: 'warning',
-      confirmButtonColor: '#c8a97e',
-      background: '#1c1c1f',
-      color: '#ffffff'
-    });
-    return;
-  }
-
-  const leitor = new FileReader();
-  leitor.onload = function (e) {
-    const novaRoupa = new Roupa(nome, categoria, e.target.result);
     const roupas = pegarRoupas();
-    roupas.push(novaRoupa);
-    salvarRoupasStorage(roupas);
-    renderizar();
-    limparFormulario();
+    if (!closetGrid) return; // Segurança: só executa se o grid existir na página
+    
+    closetGrid.innerHTML = ''; // Limpa a tela antes de desenhar
 
-    Swal.fire({
-      title: 'Perfeito ✨',
-      text: 'Peça adicionada ao closet.',
-      icon: 'success',
-      confirmButtonColor: '#c8a97e',
-      background: '#1c1c1f',
-      color: '#ffffff'
+    if (totalRoupas) totalRoupas.textContent = roupas.length;
+
+    // Percorre a lista e cria o HTML de cada card
+    roupas.forEach(function(roupa, index) {
+        const card = document.createElement('div');
+        card.classList.add('item-card');
+        
+        card.innerHTML = `
+            <img src="${roupa.imagem}" onerror="this.src='https://via.placeholder.com/150?text=Erro+na+Imagem'">
+            <div class="item-content">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3>${roupa.nome}</h3>
+                    <button onclick="favoritarRoupa(${index} )" style="border:none; background:none; cursor:pointer; font-size:22px;">
+                        ${roupa.favorita ? '❤️' : '🤍'}
+                    </button>
+                </div>
+                <div class="item-category">${roupa.categoria}</div>
+            </div>
+            <button class="remove-btn" onclick="removerRoupa(${index})">Remover</button>
+        `;
+        closetGrid.appendChild(card);
     });
-
-    fechar();
-  };
-
-  leitor.readAsDataURL(arquivo);
-});
-
-/* =====================================
-REMOVER
-===================================== */
-function removerRoupa(index) {
-  const roupas = pegarRoupas();
-  roupas.splice(index, 1);
-  salvarRoupasStorage(roupas);
-  renderizar();
 }
 
-/* =====================================
-FAVORITOS
-===================================== */
+// ==========================================
+// 4. FUNÇÕES DE INTERAÇÃO (FAVORITAR E REMOVER)
+// ==========================================
 function favoritarRoupa(index) {
-  const roupas = pegarRoupas();
-  roupas[index].favorita = !roupas[index].favorita;
-  salvarRoupasStorage(roupas);
-  renderizar();
+    const lista = pegarRoupas();
+    lista[index].favorita = !lista[index].favorita; // Inverte o estado (true/false)
+    localStorage.setItem('roupas', JSON.stringify(lista));
+    renderizar(); // Atualiza a tela
 }
 
-/* =====================================
-LIMPAR
-===================================== */
-function limparFormulario() {
-  document.getElementById('nomeRoupa').value = '';
-  document.getElementById('categoriaRoupa').value = '';
-  document.getElementById('imagemRoupa').value = '';
+function removerRoupa(index) {
+    const lista = pegarRoupas();
+    lista.splice(index, 1); // Remove o item da lista
+    localStorage.setItem('roupas', JSON.stringify(lista));
+    renderizar();
 }
 
-/* =====================================
-INIT
-===================================== */
-document.addEventListener('DOMContentLoaded', () => {
-  pegarRoupas(); // Garante que o localStorage seja inicializado com as roupas padrão
-  renderizar();
+// ==========================================
+// 5. CONFIGURAÇÃO DOS BOTÕES DO MODAL
+// ==========================================
+if (abrirModal) {
+    abrirModal.addEventListener('click', function() { modal.style.display = 'flex'; });
+}
+if (fecharModal) {
+    fecharModal.addEventListener('click', function() { modal.style.display = 'none'; });
+}
+
+// Inicia o site assim que o navegador terminar de carregar o HTML
+document.addEventListener('DOMContentLoaded', function() {
+    renderizar();
 });

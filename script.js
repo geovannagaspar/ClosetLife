@@ -18,7 +18,9 @@ function pegarRoupas() {
             { nome: "Calça Wide Leg", categoria: "Calça", imagem: "img/calca.jpg", favorita: false },
             { nome: "Camisa de Linho", categoria: "Camisa", imagem: "img/camisa.jpg", favorita: false },
             { nome: "Camisa Masculina", categoria: "Camisa", imagem: "img/camisamascu.jpg", favorita: false },
-            { nome: "Tênis Adidas Samba", categoria: "Sapato", imagem: "img/tenis.jpg", favorita: false }
+            { nome: "Calça jeans", categoria: "Calça", imagem: "img/jeans.webp", favorita: false },
+            { nome: "Bolsa", categoria: "Bolsa", imagem: "img/bolsa1.webp", favorita: false },
+            { nome: "Baby Tee", categoria: "Camisa", imagem: "img/baby2.webp", favorita: false },
         ];
         localStorage.setItem('roupas', JSON.stringify(lista));
     }

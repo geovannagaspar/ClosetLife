@@ -1,46 +1,31 @@
 const closetGrid = document.getElementById('closetGrid') || document.getElementById('inventarioGrid');
-const totalRoupas = document.getElementById('totalRoupas');
 
-// 1. Função para buscar os dados e resetar erros antigos
 function pegarRoupas() {
-    // Se for a primeira vez, garante que o banco de dados comece limpo
     if (localStorage.getItem('versao_final') !== '3.0') {
         localStorage.clear();
         localStorage.setItem('versao_final', '3.0');
     }
-
     let lista = JSON.parse(localStorage.getItem('roupas'));
-
     if (!lista || lista.length === 0) {
         lista = [
             { nome: "Baby Tee", categoria: "Camisa", imagem: "img/baby.jpg", favorita: false },
             { nome: "Bolsa Baguette", categoria: "Bolsa", imagem: "img/bolsa.jpg", favorita: false },
-            { nome: "Calça Wide Leg", categoria: "Calça", imagem: "img/calca.jpg", favorita: false },
-            { nome: "Camisa de Linho", categoria: "Camisa", imagem: "img/camisa.jpg", favorita: false },
-            { nome: "Camisa Masculina", categoria: "Camisa", imagem: "img/camisamascu.jpg", favorita: false },
-            { nome: "Calça jeans", categoria: "Calça", imagem: "img/jeans.webp", favorita: false },
-            { nome: "Bolsa", categoria: "Bolsa", imagem: "img/bolsa1.webp", favorita: false },
-            { nome: "Baby Tee", categoria: "Camisa", imagem: "img/baby2.webp", favorita: false },
+            { nome: "Calça Wide Leg", categoria: "Calça", imagem: "img/calca.jpg", favorita: false }
         ];
         localStorage.setItem('roupas', JSON.stringify(lista));
     }
     return lista;
 }
 
-// 2. Função para desenhar na tela
 function renderizar() {
     const roupas = pegarRoupas();
     if (!closetGrid) return;
-    
     closetGrid.innerHTML = '';
-
-    for (let i = 0; i < roupas.length; i++) {
-        const item = roupas[i];
+    roupas.forEach((item, i) => {
         const card = document.createElement('div');
         card.classList.add('item-card');
-        
         card.innerHTML = `
-            <img src="${item.imagem}" onerror="this.src='https://via.placeholder.com/150?text=Erro+na+Imagem'">
+            <img src="${item.imagem}" onerror="this.src='https://via.placeholder.com/150'">
             <div class="item-content">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h3>${item.nome}</h3>
@@ -48,14 +33,13 @@ function renderizar() {
                         ${item.favorita ? '❤️' : '🤍'}
                     </button>
                 </div>
-                <p>${item.categoria}</p>
-            </div>
-        `;
+                <p class="item-category">${item.categoria}</p>
+                <button onclick="removerPeca(${i})" class="remove-btn" style="margin-top:15px; border-radius:12px;">Remover</button>
+            </div>`;
         closetGrid.appendChild(card);
-    }
+    });
 }
 
-// 3. Função para favoritar
 function favoritar(indice) {
     const lista = pegarRoupas();
     lista[indice].favorita = !lista[indice].favorita;
@@ -63,5 +47,13 @@ function favoritar(indice) {
     renderizar();
 }
 
-// Inicia o site
+function removerPeca(indice) {
+    if (confirm('Deseja remover esta peça?')) {
+        const lista = pegarRoupas();
+        lista.splice(indice, 1);
+        localStorage.setItem('roupas', JSON.stringify(lista));
+        renderizar();
+    }
+}
+
 document.addEventListener('DOMContentLoaded', renderizar);

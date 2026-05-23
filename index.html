@@ -1,27 +1,82 @@
-<!-- TELA DE LOGIN (Cobre tudo no início) -->
-<div id="tela-login" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1c1c1f; display: flex; justify-content: center; align-items: center; z-index: 10000;">
-    <div style="background: #252529; padding: 40px; border-radius: 15px; border: 1px solid #c8a97e; text-align: center; width: 300px;">
-        <h1 style="color: #c8a97e; font-family: 'Cormorant Garamond', serif; margin-bottom: 10px;">ClosetLife</h1>
-        <p style="color: #fff; margin-bottom: 20px;">Acesse seu closet digital</p>
-        <input type="password" id="senhaInput" placeholder="Digite a senha (1234)" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: none; outline: none;">
-        <button onclick="verificarLogin()" style="width: 100%; padding: 12px; background: #c8a97e; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Entrar</button>
-        <p id="erroLogin" style="color: #ff4d4d; display: none; margin-top: 15px; font-size: 14px;">Senha incorreta!</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClosetLife</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
 
-<script>
-    function verificarLogin() {
-        const senha = document.getElementById('senhaInput').value;
-        if (senha === "1234") {
-            document.getElementById('tela-login').style.display = 'none';
-            // Salva que logou para não pedir de novo se atualizar a página rápido
-            sessionStorage.setItem('logado', 'sim');
-        } else {
-            document.getElementById('erroLogin').style.display = 'block';
+    <!-- 1. TELA DE LOGIN -->
+    <div id="tela-login" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1c1c1f; display: flex; justify-content: center; align-items: center; z-index: 10000;">
+        <div style="background: #252529; padding: 40px; border-radius: 15px; border: 1px solid #c8a97e; text-align: center; width: 320px;">
+            <h1 style="color: #c8a97e; font-family: 'Cormorant Garamond', serif; font-size: 32px; margin-bottom: 10px;">ClosetLife</h1>
+            <p style="color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 300; margin-bottom: 25px; font-size: 12px; letter-spacing: 2px;">ACESSE SEU CLOSET DIGITAL</p>
+            <input type="password" id="senhaInput" placeholder="Senha (1234 )" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: #1c1c1f; color: #fff; text-align: center; outline: none;">
+            <button onclick="verificarLogin()" style="width: 100%; padding: 12px; background: #c8a97e; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s;">ENTRAR</button>
+            <p id="erroLogin" style="color: #ff4d4d; display: none; margin-top: 15px; font-size: 13px;">Senha incorreta!</p>
+        </div>
+    </div>
+
+    <!-- 2. SPLASH SCREEN (Abertura) -->
+    <div id="splash" style="display: none;">
+        <div class="splash-content">
+            <h1>ClosetLife</h1>
+            <p>Seu closet digital</p>
+        </div>
+    </div>
+
+    <!-- 3. MENU PRINCIPAL (Home) -->
+    <div class="home-menu" id="menu-principal" style="display: none;">
+        <h1 class="home-logo">ClosetLife</h1>
+        <p class="home-subtitle">Seu closet digital</p>
+
+        <div class="home-buttons">
+            <a href="inventario.html" class="lux-btn">Inventário</a>
+            <a href="agenda.html" class="lux-btn">Agenda</a>
+            <a href="favoritos.html" class="lux-btn">Favoritos</a>
+            <a href="financeiro.html" class="lux-btn">Financeiro</a>
+        </div>
+
+        <div class="home-buttons" style="margin-top:25px;">
+            <a href="documentacao.html" class="lux-btn">Documentação</a>
+            <a href="uml.html" class="lux-btn">UML</a>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de Login e Transição
+        function verificarLogin() {
+            const senha = document.getElementById('senhaInput').value;
+            if (senha === "1234") {
+                // Esconde Login
+                document.getElementById('tela-login').style.display = 'none';
+                // Mostra Splash
+                document.getElementById('splash').style.display = 'flex';
+                
+                // Depois de 3 segundos, esconde Splash e mostra Menu
+                setTimeout(() => {
+                    document.getElementById('splash').style.display = 'none';
+                    document.getElementById('menu-principal').style.display = 'block';
+                    feather.replace();
+                }, 3000);
+
+                sessionStorage.setItem('logado', 'sim');
+            } else {
+                document.getElementById('erroLogin').style.display = 'block';
+            }
         }
-    }
-    // Se já logou nesta sessão, pula o login
-    if (sessionStorage.getItem('logado') === 'sim') {
-        document.getElementById('tela-login').style.display = 'none';
-    }
-</script>
+
+        // Se já logou antes, pula o login e a splash
+        if (sessionStorage.getItem('logado') === 'sim') {
+            document.getElementById('tela-login').style.display = 'none';
+            document.getElementById('menu-principal').style.display = 'block';
+            window.onload = () => { feather.replace(); };
+        }
+    </script>
+</body>
+</html>

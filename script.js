@@ -1,14 +1,3 @@
-const modal = document.getElementById('modalOverlay');
-const abrirModal = document.getElementById('abrirModal');
-const fecharModal = document.getElementById('fecharModal');
-const salvarRoupa = document.getElementById('salvarRoupa');
-const closetGrid = document.getElementById('closetGrid');
-const totalRoupas = document.getElementById('totalRoupas');
-const totalCategorias = document.getElementById('totalCategorias');
-
-/* =====================================
-PEÇAS PADRÃO (DA PASTA IMG)
-===================================== */
 const pecasPadrao = [
   { nome: "Camisa Casual", categoria: "Camisas", imagem: "img/camisa.jpg", favorita: true },
   { nome: "Calça Jeans", categoria: "Calças", imagem: "img/jeans.webp", favorita: false },
@@ -21,150 +10,78 @@ const pecasPadrao = [
   { nome: "Roupa Baby 2", categoria: "Outros", imagem: "img/baby2.webp", favorita: false }
 ];
 
-class Roupa {
-  constructor(nome, categoria, imagem) {
-    this.nome = nome;
-    this.categoria = categoria;
-    this.imagem = imagem;
-    this.favorita = false;
-  }
-}
-
 function pegarRoupas() {
   const roupas = JSON.parse(localStorage.getItem('roupas'));
-  if (!roupas || roupas.length === 0) {
-    return pecasPadrao;
-  }
-  return roupas;
+  return (roupas && roupas.length > 0) ? roupas : pecasPadrao;
 }
 
 function salvarRoupasStorage(lista) {
   localStorage.setItem('roupas', JSON.stringify(lista));
 }
 
-if(abrirModal) {
-    abrirModal.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
-}
+const modal = document.getElementById('modalOverlay');
+const abrirModal = document.getElementById('abrirModal');
+const fecharModal = document.getElementById('fecharModal');
+const salvarRoupa = document.getElementById('salvarRoupa');
+const closetGrid = document.getElementById('closetGrid');
 
-if(fecharModal) {
-    fecharModal.addEventListener('click', fechar);
-}
-
-if(modal) {
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) fechar();
-    });
-}
-
-function fechar() {
-  modal.style.display = 'none';
-}
+if (abrirModal) abrirModal.onclick = () => modal.style.display = 'flex';
+if (fecharModal) fecharModal.onclick = () => modal.style.display = 'none';
 
 function renderizar() {
-  if(!closetGrid) return;
+  if (!closetGrid) return;
   const roupas = pegarRoupas();
   closetGrid.innerHTML = '';
-
-  if(totalRoupas) totalRoupas.textContent = roupas.length;
-
-  const categorias = [...new Set(roupas.map(r => r.categoria))];
-  if(totalCategorias) totalCategorias.textContent = categorias.length;
-
-  if (roupas.length === 0) {
-    closetGrid.innerHTML = `
-      <div class="empty-state">
-        <h3>Seu closet está vazio</h3>
-        <p>Adicione sua primeira peça.</p>
-      </div>
-    `;
-    return;
-  }
-
   roupas.forEach((roupa, index) => {
     const card = document.createElement('div');
-    card.classList.add('item-card');
-    card.innerHTML = \`
-      <img src="\${roupa.imagem}" onerror="this.src='https://via.placeholder.com/300x400?text=Imagem+Indispon%C3%ADvel'" alt="\${roupa.nome}">
+    card.className = 'item-card';
+    card.innerHTML = `
+      <img src="${roupa.imagem}" onerror="this.src='https://via.placeholder.com/300x400?text=Erro+Imagem'" style="width:100%; height:280px; object-fit:cover;">
       <div class="item-content">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h3>\${roupa.nome}</h3>
-          <button onclick="favoritarRoupa(\${index} )" style="border:none; background:none; cursor:pointer; font-size:22px;">
-            \${roupa.favorita ? '❤️' : '🤍'}
+        <div style="display:flex; justify-content:space-between;">
+          <h3>${roupa.nome}</h3>
+          <button onclick="favoritarRoupa(${index} )" style="border:none; background:none; cursor:pointer; font-size:20px;">
+            ${roupa.favorita ? '❤️' : '🤍'}
           </button>
         </div>
-        <div class="item-category">\${roupa.categoria}</div>
+        <div class="item-category">${roupa.categoria}</div>
       </div>
-      <button class="remove-btn" onclick="removerRoupa(\${index})">Remover</button>
-    \`;
+      <button class="remove-btn" onclick="removerRoupa(${index})">Remover</button>
+    `;
     closetGrid.appendChild(card);
   });
 }
 
-async function comprimirImagem(dataUrl) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.src = dataUrl;
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 600;
-      const scaleSize = MAX_WIDTH / img.width;
-      canvas.width = MAX_WIDTH;
-      canvas.height = img.height * scaleSize;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      resolve(canvas.toDataURL('image/jpeg', 0.7));
+if (salvarRoupa) {
+  salvarRoupa.onclick = async () => {
+    const nome = document.getElementById('nomeRoupa').value;
+    const categoria = document.getElementById('categoriaRoupa').value;
+    const arquivo = document.getElementById('imagemRoupa').files[0];
+
+    if (!nome || !categoria || !arquivo) {
+      Swal.fire('Atenção', 'Preencha todos os campos!', 'warning');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const roupas = pegarRoupas();
+      roupas.push({ nome, categoria, imagem: e.target.result, favorita: false });
+      salvarRoupasStorage(roupas);
+      renderizar();
+      modal.style.display = 'none';
+      Swal.fire('Sucesso', 'Peça adicionada!', 'success');
     };
-  });
+    reader.readAsDataURL(arquivo);
+  };
 }
 
-if(salvarRoupa) {
-    salvarRoupa.addEventListener('click', async () => {
-      const nome = document.getElementById('nomeRoupa').value;
-      const categoria = document.getElementById('categoriaRoupa').value;
-      const arquivo = document.getElementById('imagemRoupa').files[0];
-
-      if (!nome || !categoria || !arquivo) {
-        Swal.fire({ title: 'Oops!', text: 'Preencha todos os campos.', icon: 'warning', confirmButtonColor: '#c8a97e' });
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.readAsDataURL(arquivo);
-      reader.onload = async (e) => {
-        const imagemComprimida = await comprimirImagem(e.target.result);
-        const roupas = pegarRoupas();
-        roupas.push(new Roupa(nome, categoria, imagemComprimida));
-        salvarRoupasStorage(roupas);
-        renderizar();
-        limparFormulario();
-        Swal.fire({ title: 'Perfeito ✨', text: 'Peça adicionada ao closet.', icon: 'success', confirmButtonColor: '#c8a97e' });
-        fechar();
-      };
-    });
-}
-
-function limparFormulario() {
-  if(document.getElementById('nomeRoupa')) document.getElementById('nomeRoupa').value = '';
-  if(document.getElementById('categoriaRoupa')) document.getElementById('categoriaRoupa').value = '';
-  if(document.getElementById('imagemRoupa')) document.getElementById('imagemRoupa').value = '';
-}
-
-window.removerRoupa = (index) => {
-  const roupas = pegarRoupas();
-  roupas.splice(index, 1);
-  salvarRoupasStorage(roupas);
-  renderizar();
+window.removerRoupa = (i) => {
+  const r = pegarRoupas(); r.splice(i, 1); salvarRoupasStorage(r); renderizar();
 };
 
-window.favoritarRoupa = (index) => {
-  const roupas = pegarRoupas();
-  roupas[index].favorita = !roupas[index].favorita;
-  salvarRoupasStorage(roupas);
-  renderizar();
+window.favoritarRoupa = (i) => {
+  const r = pegarRoupas(); r[i].favorita = !r[i].favorita; salvarRoupasStorage(r); renderizar();
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderizar();
-});
+document.addEventListener('DOMContentLoaded', renderizar);

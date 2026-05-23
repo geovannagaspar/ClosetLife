@@ -1,719 +1,586 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!-- 1 -->
 
-<head>
+<section class="card" style="margin-bottom:25px;">
 
-  <meta charset="UTF-8"/>
+  <h2 style="margin-bottom:18px;">
+    1. Introdução
+  </h2>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <p style="line-height:1.9;">
 
-  <title>Documentação | ClosetLife</title>
+    O ClosetLife é uma aplicação web desenvolvida com o objetivo de auxiliar usuários no gerenciamento digital de roupas, organização do guarda-roupa e controle visual de peças pessoais.
 
-  <link rel="stylesheet" href="style.css"/>
+    O sistema foi criado aplicando conceitos fundamentais de Engenharia e Qualidade de Software, utilizando práticas relacionadas à modelagem, arquitetura em camadas, responsividade, usabilidade e organização modular do código.
 
-  <!-- FONTES -->
+    A proposta do projeto consiste em oferecer uma solução simples, moderna e intuitiva para facilitar a administração de roupas, favoritos, agenda pessoal e controle financeiro relacionado ao closet.
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    <br><br>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    <strong>Público-alvo:</strong>
+    Usuários que desejam organizar roupas, montar combinações e visualizar informações do closet de forma digital e acessível.
 
-  <!-- ÍCONES -->
+    <br><br>
 
-  <script src="https://unpkg.com/feather-icons"></script>
+    <strong>Escopo do Projeto:</strong>
+    O sistema permite cadastro, visualização e gerenciamento de peças de roupas, além de recursos complementares como favoritos, agenda e controle financeiro, utilizando armazenamento local e interface responsiva.
 
-</head>
+  </p>
 
-<body>
+</section>
 
-<div class="dashboard">
+<!-- 2 -->
 
-  <!-- SIDEBAR -->
+<section class="card" style="margin-bottom:25px;">
 
-  <aside class="sidebar">
+  <h2 style="margin-bottom:18px;">
+    2. Objetivos do Sistema
+  </h2>
 
-    <div class="logo">
-      ClosetLife
-    </div>
+  <ul style="line-height:2; padding-left:20px;">
 
-    <nav class="menu">
+    <li>Desenvolver um sistema web funcional para gerenciamento de roupas</li>
 
-      <a href="index.html">
-        <i data-feather="grid"></i>
-        <span>Dashboard</span>
-      </a>
+    <li>Aplicar conceitos de Engenharia e Qualidade de Software</li>
 
-      <a href="inventario.html">
-        <i data-feather="shopping-bag"></i>
-        <span>Inventário</span>
-      </a>
+    <li>Organizar peças e informações de forma digital</li>
 
-      <a href="agenda.html">
-        <i data-feather="calendar"></i>
-        <span>Agenda</span>
-      </a>
+    <li>Garantir usabilidade e navegação intuitiva</li>
 
-      <a href="favoritos.html">
-        <i data-feather="heart"></i>
-        <span>Favoritos</span>
-      </a>
+    <li>Implementar interface responsiva para múltiplos dispositivos</li>
 
-      <a href="financeiro.html">
-        <i data-feather="dollar-sign"></i>
-        <span>Financeiro</span>
-      </a>
+    <li>Utilizar armazenamento local para persistência dos dados</li>
 
-      <a
-        href="documentacao.html"
-        class="active"
-      >
-        <i data-feather="book-open"></i>
-        <span>Documentação</span>
-      </a>
+  </ul>
 
-      <a href="uml.html">
-        <i data-feather="git-branch"></i>
-        <span>UML</span>
-      </a>
+</section>
 
-    </nav>
+<!-- 3 -->
 
-  </aside>
+<section class="card" style="margin-bottom:25px;">
 
-  <!-- MAIN -->
+  <h2 style="margin-bottom:18px;">
+    3. Requisitos Funcionais
+  </h2>
 
-  <main class="main-content">
+  <ul style="line-height:2; padding-left:20px;">
 
-    <!-- TOPO -->
+    <li>RF01 - Permitir cadastro de roupas</li>
 
-    <header class="topbar">
+    <li>RF02 - Permitir upload de imagens</li>
 
-      <div>
+    <li>RF03 - Favoritar peças</li>
 
-        <h1>
-          Documentação Técnica
-        </h1>
+    <li>RF04 - Remover roupas cadastradas</li>
 
-        <p>
-          Engenharia e Qualidade de Software
-        </p>
+    <li>RF05 - Exibir dashboard principal</li>
 
-      </div>
+    <li>RF06 - Navegar entre páginas</li>
 
-    </header>
+    <li>RF07 - Armazenar dados no navegador</li>
 
-    <!-- 1 -->
+    <li>RF08 - Exibir agenda de organização</li>
 
-    <section class="card" style="margin-bottom:25px;">
+    <li>RF09 - Exibir controle financeiro</li>
 
-      <h2 style="margin-bottom:18px;">
-        1. Introdução
-      </h2>
+    <li>RF10 - Permitir interface responsiva</li>
 
-      <p style="line-height:1.9;">
+  </ul>
 
-        O ClosetLife é um sistema web desenvolvido
-        para auxiliar usuários na organização de roupas,
-        favoritos, categorias e gerenciamento digital
-        do closet pessoal.
+</section>
 
-        O projeto foi criado utilizando conceitos
-        de Engenharia e Qualidade de Software,
-        priorizando organização visual,
-        responsividade, experiência do usuário
-        e facilidade de navegação.
+<!-- 4 -->
 
-        <br><br>
+<section class="card" style="margin-bottom:25px;">
 
-        <strong>Público-alvo:</strong>
-        Pessoas que desejam organizar roupas,
-        looks e peças de forma digital.
+  <h2 style="margin-bottom:18px;">
+    4. Requisitos Não Funcionais
+  </h2>
 
-        <br><br>
+  <ul style="line-height:2; padding-left:20px;">
 
-        <strong>Escopo do Projeto:</strong>
-        O sistema permite cadastrar roupas,
-        favoritar peças, visualizar agenda,
-        acessar área financeira e organizar
-        o closet digital através de uma
-        interface moderna e responsiva.
+    <li>RNF01 - Sistema responsivo</li>
 
-      </p>
+    <li>RNF02 - Interface intuitiva</li>
 
-    </section>
+    <li>RNF03 - Carregamento rápido</li>
 
-    <!-- 2 -->
+    <li>RNF04 - Compatibilidade com navegadores modernos</li>
 
-    <section class="card" style="margin-bottom:25px;">
+    <li>RNF05 - Organização modular do código</li>
 
-      <h2 style="margin-bottom:18px;">
-        2. Objetivos do Sistema
-      </h2>
+  </ul>
 
-      <ul style="line-height:2; padding-left:20px;">
+</section>
 
-        <li>Organizar roupas digitalmente</li>
+<!-- 5 -->
 
-        <li>Permitir cadastro de peças</li>
+<section class="card" style="margin-bottom:25px;">
 
-        <li>Facilitar gerenciamento do closet</li>
+  <h2 style="margin-bottom:18px;">
+    5. Arquitetura do Sistema
+  </h2>
 
-        <li>Criar interface intuitiva</li>
+  <p style="line-height:1.9; margin-bottom:20px;">
 
-        <li>Aplicar responsividade</li>
+    O ClosetLife utiliza arquitetura em camadas, separando interface visual, lógica de negócio e persistência de dados. Essa organização facilita manutenção, escalabilidade e reutilização do código, além de melhorar a estrutura geral do sistema.
 
-        <li>Melhorar experiência visual</li>
+  </p>
 
-      </ul>
+  <table style="width:100%; line-height:2;">
 
-    </section>
+    <tr>
 
-    <!-- 3 -->
+      <td>
+        <strong>Camada</strong>
+      </td>
 
-    <section class="card" style="margin-bottom:25px;">
+      <td>
+        <strong>Tecnologia</strong>
+      </td>
 
-      <h2 style="margin-bottom:18px;">
-        3. Requisitos Funcionais
-      </h2>
+    </tr>
 
-      <ul style="line-height:2; padding-left:20px;">
+    <tr>
 
-        <li>RF01 - Permitir cadastro de roupas</li>
+      <td>Interface</td>
 
-        <li>RF02 - Permitir upload de imagens</li>
+      <td>HTML5 e CSS3</td>
 
-        <li>RF03 - Favoritar peças</li>
+    </tr>
 
-        <li>RF04 - Remover roupas cadastradas</li>
+    <tr>
 
-        <li>RF05 - Exibir dashboard principal</li>
+      <td>Lógica</td>
 
-        <li>RF06 - Navegar entre páginas</li>
+      <td>JavaScript</td>
 
-        <li>RF07 - Armazenar dados no navegador</li>
+    </tr>
 
-        <li>RF08 - Exibir agenda de organização</li>
+    <tr>
 
-        <li>RF09 - Exibir controle financeiro</li>
+      <td>Persistência</td>
 
-        <li>RF10 - Permitir interface responsiva</li>
+      <td>LocalStorage</td>
 
-      </ul>
+    </tr>
 
-    </section>
+  </table>
 
-    <!-- 4 -->
+</section>
 
-    <section class="card" style="margin-bottom:25px;">
+<!-- 6 -->
 
-      <h2 style="margin-bottom:18px;">
-        4. Requisitos Não Funcionais
-      </h2>
+<section class="card" style="margin-bottom:25px;">
 
-      <ul style="line-height:2; padding-left:20px;">
+  <h2 style="margin-bottom:18px;">
+    6. Paradigmas de Desenvolvimento
+  </h2>
 
-        <li>RNF01 - Sistema responsivo</li>
+  <p style="line-height:1.9;">
 
-        <li>RNF02 - Interface intuitiva</li>
+    O sistema utiliza conceitos de Programação Orientada a Objetos (POO) para organização das estruturas e componentes do projeto, além de práticas funcionais aplicadas em funções JavaScript responsáveis pela manipulação de dados e atualização dinâmica da interface.
 
-        <li>RNF03 - Carregamento rápido</li>
+    Essa abordagem contribui para maior organização, reutilização de código e facilidade de manutenção futura.
 
-        <li>RNF04 - Compatibilidade com navegadores modernos</li>
+  </p>
 
-        <li>RNF05 - Organização modular do código</li>
+</section>
 
-      </ul>
+<!-- 7 -->
 
-    </section>
+<section class="card" style="margin-bottom:25px;">
 
-    <!-- 5 -->
+  <h2 style="margin-bottom:18px;">
+    7. Ciclo de Vida do Software
+  </h2>
 
-    <section class="card" style="margin-bottom:25px;">
+  <table style="width:100%; line-height:2;">
 
-      <h2 style="margin-bottom:18px;">
-        5. Arquitetura do Sistema
-      </h2>
+    <tr>
 
-      <p style="line-height:1.9; margin-bottom:20px;">
+      <td><strong>Fase</strong></td>
 
-        O sistema utiliza arquitetura em camadas,
-        separando interface, lógica de negócio
-        e persistência de dados.
+      <td><strong>Descrição</strong></td>
 
-      </p>
+    </tr>
 
-      <table style="width:100%; line-height:2;">
+    <tr>
 
-        <tr>
+      <td>Requisitos</td>
 
-          <td>
-            <strong>Camada</strong>
-          </td>
+      <td>Definição das funcionalidades do sistema</td>
 
-          <td>
-            <strong>Tecnologia</strong>
-          </td>
+    </tr>
 
-        </tr>
+    <tr>
 
-        <tr>
+      <td>Design</td>
 
-          <td>Interface</td>
+      <td>Planejamento visual e estrutural da aplicação</td>
 
-          <td>HTML5 e CSS3</td>
+    </tr>
 
-        </tr>
+    <tr>
 
-        <tr>
+      <td>Implementação</td>
 
-          <td>Lógica</td>
+      <td>Desenvolvimento das funcionalidades</td>
 
-          <td>JavaScript</td>
+    </tr>
 
-        </tr>
+    <tr>
 
-        <tr>
+      <td>Testes</td>
 
-          <td>Persistência</td>
+      <td>Validação e correção das funcionalidades</td>
 
-          <td>LocalStorage</td>
+    </tr>
 
-        </tr>
+    <tr>
 
-      </table>
+      <td>Deploy</td>
 
-    </section>
+      <td>Publicação do sistema em ambiente web</td>
 
-    <!-- 6 -->
+    </tr>
 
-    <section class="card" style="margin-bottom:25px;">
+  </table>
 
-      <h2 style="margin-bottom:18px;">
-        6. Paradigmas de Desenvolvimento
-      </h2>
+</section>
 
-      <p style="line-height:1.9;">
+<!-- 8 -->
 
-        O projeto aplica conceitos de
-        Programação Orientada a Objetos (POO)
-        e Programação Funcional,
-        permitindo melhor organização,
-        reutilização de código
-        e manutenção futura.
+<section class="card" style="margin-bottom:25px;">
 
-      </p>
+  <h2 style="margin-bottom:18px;">
+    8. Metodologia Ágil
+  </h2>
 
-    </section>
+  <p style="line-height:1.9;">
 
-    <!-- 7 -->
+    O desenvolvimento do ClosetLife foi baseado em princípios da metodologia ágil, permitindo evolução contínua do sistema durante todas as etapas do projeto.
 
-    <section class="card" style="margin-bottom:25px;">
+    A abordagem incremental possibilitou implementar funcionalidades gradualmente, realizar testes constantes e aplicar melhorias visuais e estruturais ao longo do desenvolvimento.
 
-      <h2 style="margin-bottom:18px;">
-        7. Ciclo de Vida do Software
-      </h2>
+    Diferente dos modelos tradicionais, a metodologia ágil oferece maior flexibilidade para adaptações e correções rápidas durante a construção do software.
 
-      <table style="width:100%; line-height:2;">
+  </p>
 
-        <tr>
+</section>
 
-          <td><strong>Fase</strong></td>
+<!-- 9 -->
 
-          <td><strong>Descrição</strong></td>
+<section class="card" style="margin-bottom:25px;">
 
-        </tr>
+  <h2 style="margin-bottom:18px;">
+    9. Funcionalidades do Sistema
+  </h2>
 
-        <tr>
+  <ul style="line-height:2; padding-left:20px;">
 
-          <td>Requisitos</td>
+    <li>Cadastro de roupas</li>
 
-          <td>Definição das funcionalidades</td>
+    <li>Upload de imagens</li>
 
-        </tr>
+    <li>Favoritar peças</li>
 
-        <tr>
+    <li>Dashboard principal</li>
 
-          <td>Design</td>
+    <li>Agenda visual</li>
 
-          <td>Planejamento visual e estrutural</td>
+    <li>Controle financeiro</li>
 
-        </tr>
+    <li>Navegação entre páginas</li>
 
-        <tr>
+    <li>Interface responsiva</li>
 
-          <td>Implementação</td>
+  </ul>
 
-          <td>Desenvolvimento do sistema</td>
+</section>
 
-        </tr>
+<!-- 10 -->
 
-        <tr>
+<section class="card" style="margin-bottom:25px;">
 
-          <td>Testes</td>
+  <h2 style="margin-bottom:18px;">
+    10. Tecnologias Utilizadas
+  </h2>
 
-          <td>Validação das funcionalidades</td>
+  <ul style="line-height:2; padding-left:20px;">
 
-        </tr>
+    <li>HTML5</li>
 
-        <tr>
+    <li>CSS3</li>
 
-          <td>Deploy</td>
+    <li>JavaScript</li>
 
-          <td>Execução em ambiente web</td>
+    <li>LocalStorage API</li>
 
-        </tr>
+    <li>SweetAlert2</li>
 
-      </table>
+    <li>Feather Icons</li>
 
-    </section>
+    <li>Google Fonts</li>
 
-    <!-- 8 -->
+  </ul>
 
-    <section class="card" style="margin-bottom:25px;">
+</section>
 
-      <h2 style="margin-bottom:18px;">
-        8. Metodologia Ágil
-      </h2>
+<!-- 11 -->
 
-      <p style="line-height:1.9;">
+<section class="card" style="margin-bottom:25px;">
 
-        O desenvolvimento do sistema foi baseado
-        em conceitos ágeis, permitindo melhorias
-        contínuas, evolução visual e adaptação
-        durante todo o processo.
+  <h2 style="margin-bottom:18px;">
+    11. Casos de Teste
+  </h2>
 
-        <br><br>
+  <table style="width:100%; line-height:2;">
 
-        O modelo tradicional possui etapas mais rígidas,
-        enquanto o modelo ágil permite mudanças rápidas
-        e melhorias constantes durante o desenvolvimento.
+    <tr>
 
-      </p>
+      <td><strong>Caso</strong></td>
 
-    </section>
+      <td><strong>Ação</strong></td>
 
-    <!-- 9 -->
+      <td><strong>Resultado Esperado</strong></td>
 
-    <section class="card" style="margin-bottom:25px;">
+    </tr>
 
-      <h2 style="margin-bottom:18px;">
-        9. Funcionalidades do Sistema
-      </h2>
+    <tr>
 
-      <ul style="line-height:2; padding-left:20px;">
+      <td>CT01</td>
 
-        <li>Cadastro de roupas</li>
+      <td>Adicionar roupa</td>
 
-        <li>Upload de imagens</li>
+      <td>Roupa cadastrada</td>
 
-        <li>Favoritar peças</li>
+    </tr>
 
-        <li>Dashboard principal</li>
+    <tr>
 
-        <li>Agenda visual</li>
+      <td>CT02</td>
 
-        <li>Controle financeiro</li>
+      <td>Favoritar roupa</td>
 
-        <li>Navegação entre páginas</li>
+      <td>Roupa favoritada</td>
 
-        <li>Interface responsiva</li>
+    </tr>
 
-      </ul>
+    <tr>
 
-    </section>
+      <td>CT03</td>
 
-    <!-- 10 -->
+      <td>Excluir roupa</td>
 
-    <section class="card" style="margin-bottom:25px;">
+      <td>Roupa removida</td>
 
-      <h2 style="margin-bottom:18px;">
-        10. Tecnologias Utilizadas
-      </h2>
+    </tr>
 
-      <ul style="line-height:2; padding-left:20px;">
+    <tr>
 
-        <li>HTML5</li>
+      <td>CT04</td>
 
-        <li>CSS3</li>
+      <td>Acessar agenda</td>
 
-        <li>JavaScript</li>
+      <td>Página carregada</td>
 
-        <li>LocalStorage API</li>
+    </tr>
 
-        <li>SweetAlert2</li>
+    <tr>
 
-        <li>Feather Icons</li>
+      <td>CT05</td>
 
-        <li>Google Fonts</li>
+      <td>Acessar financeiro</td>
 
-      </ul>
+      <td>Dados exibidos</td>
 
-    </section>
+    </tr>
 
-    <!-- 11 -->
+    <tr>
 
-    <section class="card" style="margin-bottom:25px;">
+      <td>CT06</td>
 
-      <h2 style="margin-bottom:18px;">
-        11. Casos de Teste
-      </h2>
+      <td>Responsividade mobile</td>
 
-      <table style="width:100%; line-height:2;">
+      <td>Layout adaptado</td>
 
-        <tr>
+    </tr>
 
-          <td><strong>Caso</strong></td>
+    <tr>
 
-          <td><strong>Ação</strong></td>
+      <td>CT07</td>
 
-          <td><strong>Resultado Esperado</strong></td>
+      <td>Salvar dados</td>
 
-        </tr>
+      <td>Persistência no navegador</td>
 
-        <tr>
+    </tr>
 
-          <td>CT01</td>
+    <tr>
 
-          <td>Adicionar roupa</td>
+      <td>CT08</td>
 
-          <td>Roupa cadastrada</td>
+      <td>Navegação entre páginas</td>
 
-        </tr>
+      <td>Links funcionando</td>
 
-        <tr>
+    </tr>
 
-          <td>CT02</td>
+  </table>
 
-          <td>Favoritar roupa</td>
+</section>
 
-          <td>Roupa favoritada</td>
+<!-- 12 -->
 
-        </tr>
+<section class="card" style="margin-bottom:25px;">
 
-        <tr>
+  <h2 style="margin-bottom:18px;">
+    12. Qualidade de Software
+  </h2>
 
-          <td>CT03</td>
+  <p style="line-height:1.9;">
 
-          <td>Excluir roupa</td>
+    O sistema foi desenvolvido priorizando princípios de qualidade de software, incluindo usabilidade, organização modular, responsividade, desempenho e experiência do usuário.
 
-          <td>Roupa removida</td>
+    Além disso, foram aplicadas práticas voltadas para manutenção futura, padronização visual e clareza estrutural do código-fonte.
 
-        </tr>
+  </p>
 
-        <tr>
+</section>
 
-          <td>CT04</td>
+<!-- 13 -->
 
-          <td>Acessar agenda</td>
+<section class="card" style="margin-bottom:25px;">
 
-          <td>Página carregada</td>
+  <h2 style="margin-bottom:18px;">
+    13. Métricas de Qualidade
+  </h2>
 
-        </tr>
+  <table style="width:100%; line-height:2;">
 
-        <tr>
+    <tr>
 
-          <td>CT05</td>
+      <td><strong>Métrica</strong></td>
 
-          <td>Acessar financeiro</td>
+      <td><strong>Resultado</strong></td>
 
-          <td>Dados exibidos</td>
+    </tr>
 
-        </tr>
+    <tr>
 
-        <tr>
+      <td>Tempo de carregamento</td>
 
-          <td>CT06</td>
+      <td>Menos de 2 segundos</td>
 
-          <td>Responsividade mobile</td>
+    </tr>
 
-          <td>Layout adaptado</td>
+    <tr>
 
-        </tr>
+      <td>Responsividade</td>
 
-        <tr>
+      <td>Compatível com mobile e desktop</td>
 
-          <td>CT07</td>
+    </tr>
 
-          <td>Salvar dados</td>
+    <tr>
 
-          <td>Persistência no navegador</td>
+      <td>Usabilidade</td>
 
-        </tr>
+      <td>Interface intuitiva</td>
 
-        <tr>
+    </tr>
 
-          <td>CT08</td>
+    <tr>
 
-          <td>Navegação entre páginas</td>
+      <td>Manutenibilidade</td>
 
-          <td>Links funcionando</td>
+      <td>Código organizado</td>
 
-        </tr>
+    </tr>
 
-      </table>
+  </table>
 
-    </section>
+</section>
 
-    <!-- 12 -->
+<!-- 14 -->
 
-    <section class="card" style="margin-bottom:25px;">
+<section class="card" style="margin-bottom:25px;">
 
-      <h2 style="margin-bottom:18px;">
-        12. Qualidade de Software
-      </h2>
+  <h2 style="margin-bottom:18px;">
+    14. Validação com Usuários
+  </h2>
 
-      <p style="line-height:1.9;">
+  <p style="line-height:1.9;">
 
-        O sistema foi desenvolvido priorizando
-        usabilidade, organização modular,
-        responsividade e experiência visual.
+    Foram realizados testes de navegação com usuários para validar funcionalidades, usabilidade e organização visual do sistema.
 
-      </p>
+    Os feedbacks recebidos destacaram positivamente a facilidade de uso, aparência moderna e praticidade na navegação entre páginas.
 
-    </section>
+  </p>
 
-    <!-- 13 -->
+</section>
 
-    <section class="card" style="margin-bottom:25px;">
+<!-- 15 -->
 
-      <h2 style="margin-bottom:18px;">
-        13. Métricas de Qualidade
-      </h2>
+<section class="card" style="margin-bottom:25px;">
 
-      <table style="width:100%; line-height:2;">
+  <h2 style="margin-bottom:18px;">
+    15. Cronograma
+  </h2>
 
-        <tr>
+  <table style="width:100%; line-height:2;">
 
-          <td><strong>Métrica</strong></td>
+    <tr>
 
-          <td><strong>Resultado</strong></td>
+      <td><strong>Semana</strong></td>
 
-        </tr>
+      <td><strong>Atividade</strong></td>
 
-        <tr>
+    </tr>
 
-          <td>Tempo de carregamento</td>
+    <tr>
 
-          <td>Menos de 2 segundos</td>
+      <td>Semana 1</td>
 
-        </tr>
+      <td>Planejamento e levantamento de requisitos</td>
 
-        <tr>
+    </tr>
 
-          <td>Responsividade</td>
+    <tr>
 
-          <td>Compatível com mobile e desktop</td>
+      <td>Semana 2</td>
 
-        </tr>
+      <td>Desenvolvimento HTML e CSS</td>
 
-        <tr>
+    </tr>
 
-          <td>Usabilidade</td>
+    <tr>
 
-          <td>Interface intuitiva</td>
+      <td>Semana 3</td>
 
-        </tr>
+      <td>Implementação JavaScript e funcionalidades</td>
 
-        <tr>
+    </tr>
 
-          <td>Manutenibilidade</td>
+    <tr>
 
-          <td>Código organizado</td>
+      <td>Semana 4</td>
 
-        </tr>
+      <td>Testes, documentação e deploy</td>
 
-      </table>
+    </tr>
 
-    </section>
+  </table>
 
-    <!-- 14 -->
+</section>
 
-    <section class="card" style="margin-bottom:25px;">
+<!-- 16 -->
 
-      <h2 style="margin-bottom:18px;">
-        14. Validação com Usuários
-      </h2>
+<section class="card" style="margin-bottom:25px;">
 
-      <p style="line-height:1.9;">
-
-        Foram realizados testes de navegação
-        com usuários, que avaliaram positivamente
-        a organização visual, facilidade de uso
-        e aparência moderna do sistema.
-
-      </p>
-
-    </section>
-
-    <!-- 15 -->
-
-    <section class="card" style="margin-bottom:25px;">
-
-      <h2 style="margin-bottom:18px;">
-        15. Cronograma
-      </h2>
-
-      <table style="width:100%; line-height:2;">
-
-        <tr>
-
-          <td><strong>Semana</strong></td>
-
-          <td><strong>Atividade</strong></td>
-
-        </tr>
-
-        <tr>
-
-          <td>Semana 1</td>
-
-          <td>Planejamento do projeto</td>
-
-        </tr>
-
-        <tr>
-
-          <td>Semana 2</td>
-
-          <td>Desenvolvimento HTML e CSS</td>
-
-        </tr>
-
-        <tr>
-
-          <td>Semana 3</td>
-
-          <td>Implementação JavaScript</td>
-
-        </tr>
-
-        <tr>
-
-          <td>Semana 4</td>
-
-          <td>Testes e documentação</td>
-
-        </tr>
-
-      </table>
-
-    </section>
-
-    <!-- 16 -->
-
-    <section class="card" style="margin-bottom:25px;">
-
-      <h2 style="margin-bottom:18px;">
-        16. Estrutura do Projeto
-      </h2>
+  <h2 style="margin-bottom:18px;">
+    16. Estrutura do Projeto
+  </h2>
 
 <pre style="line-height:2; overflow:auto;">
 
@@ -732,103 +599,76 @@ ClosetLife/
 
 </pre>
 
-    </section>
+</section>
 
-    <!-- 17 -->
+<!-- 17 -->
 
-    <section class="card" style="margin-bottom:25px;">
+<section class="card" style="margin-bottom:25px;">
 
-      <h2 style="margin-bottom:18px;">
-        17. Diagramas UML
-      </h2>
+  <h2 style="margin-bottom:18px;">
+    17. Diagramas UML
+  </h2>
 
-      <p style="line-height:1.9;">
+  <p style="line-height:1.9;">
 
-        O sistema possui diagramas UML
-        representando casos de uso,
-        classes, sequência, atividades
-        e arquitetura em camadas.
+    O projeto possui diagramas UML representando casos de uso, classes, sequência, atividades e arquitetura em camadas, auxiliando na compreensão estrutural e organizacional do sistema.
 
-      </p>
+  </p>
 
-    </section>
+</section>
 
-    <!-- 18 -->
+<!-- 18 -->
 
-    <section class="card" style="margin-bottom:25px;">
+<section class="card" style="margin-bottom:25px;">
 
-      <h2 style="margin-bottom:18px;">
-        18. Publicação e Deploy
-      </h2>
+  <h2 style="margin-bottom:18px;">
+    18. Publicação e Deploy
+  </h2>
 
-      <ul style="line-height:2; padding-left:20px;">
+  <ul style="line-height:2; padding-left:20px;">
 
-        <li>GitHub: link-do-repositorio</li>
+    <li>GitHub: https://github.com/GeovannaGaspar/ClosetLife</li>
 
-        <li>Deploy: link-do-site-publicado</li>
+    <li>Deploy: https://geovannagaspar.github.io/ClosetLife/</li>
 
-        <li>Hospedagem: GitHub Pages / Vercel</li>
+    <li>Hospedagem: GitHub Pages</li>
 
-      </ul>
+  </ul>
 
-    </section>
+</section>
 
-    <!-- 19 -->
+<!-- 19 -->
 
-    <section class="card">
+<section class="card">
 
-      <h2 style="margin-bottom:18px;">
-        19. Conclusão
-      </h2>
+  <h2 style="margin-bottom:18px;">
+    19. Conclusão
+  </h2>
 
-      <p style="line-height:1.9; margin-bottom:18px;">
+  <p style="line-height:1.9; margin-bottom:18px;">
 
-        O desenvolvimento do ClosetLife ajudou
-        na aplicação dos conteúdos aprendidos
-        em Engenharia e Qualidade de Software
-        de forma prática e mais fácil de entender.
+    O desenvolvimento do ClosetLife permitiu aplicar, de forma prática, os principais conceitos estudados na disciplina de Engenharia e Qualidade de Software.
 
-      </p>
+    Durante o projeto foram trabalhados processos relacionados ao levantamento de requisitos, modelagem UML, arquitetura em camadas, organização do código, testes, documentação e publicação da aplicação.
 
-      <p style="line-height:1.9; margin-bottom:18px;">
+  </p>
 
-        Durante o projeto foi possível trabalhar
-        com planejamento, organização do sistema,
-        documentação, modelagem UML
-        e desenvolvimento web.
+  <p style="line-height:1.9; margin-bottom:18px;">
 
-      </p>
+    A construção do sistema contribuiu para o desenvolvimento de conhecimentos técnicos em HTML, CSS e JavaScript, além de proporcionar maior compreensão sobre planejamento e estruturação de sistemas web responsivos.
 
-      <p style="line-height:1.9; margin-bottom:18px;">
+  </p>
 
-        O sistema foi criado com o objetivo
-        de facilitar a organização digital
-        de roupas e informações do usuário,
-        trazendo uma interface simples,
-        moderna e responsiva.
+  <p style="line-height:1.9; margin-bottom:18px;">
 
-      </p>
+    O ClosetLife foi desenvolvido com foco em usabilidade, organização visual e praticidade, oferecendo uma solução moderna para gerenciamento digital de roupas e informações relacionadas ao closet pessoal.
 
-      <p style="line-height:1.9;">
+  </p>
 
-        Como melhorias futuras,
-        o ClosetLife poderá receber
-        sistema de login,
-        banco de dados online
-        e novas funcionalidades
-        para personalização do closet.
+  <p style="line-height:1.9;">
 
-      </p>
+    Como melhorias futuras, pretende-se implementar autenticação de usuários, integração com banco de dados online, personalização avançada do sistema e novas funcionalidades voltadas para recomendações inteligentes de looks e gerenciamento completo do guarda-roupa.
 
-    </section>
+  </p>
 
-  </main>
-
-</div>
-
-<script>
-  feather.replace();
-</script>
-
-</body>
-</html>
+</section>

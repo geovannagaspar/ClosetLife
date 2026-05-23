@@ -6,77 +6,69 @@
     <title>Inventário | ClosetLife</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
 <div class="dashboard">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="logo">ClosetLife</div>
         <nav class="menu">
-            <a href="index.html"><i data-feather="grid"></i><span>Home</span></a>
-            <a href="inventario.html" class="active"><i data-feather="shopping-bag"></i><span>Inventário</span></a>
-            <a href="agenda.html"><i data-feather="calendar"></i><span>Agenda</span></a>
-            <a href="favoritos.html"><i data-feather="heart"></i><span>Favoritos</span></a>
-            <a href="financeiro.html"><i data-feather="dollar-sign"></i><span>Financeiro</span></a>
+            <a href="index.html">Home</a>
+            <a href="inventario.html" class="active">Inventário</a>
+            <a href="favoritos.html">Favoritos</a>
         </nav>
     </aside>
-
-    <!-- MAIN CONTENT -->
     <main class="main-content">
-        <header class="topbar">
-            <h1>Inventário</h1>
-            <p>Gerencie suas peças de roupa</p>
-        </header>
-
-        <!-- FORMULÁRIO DE ADICIONAR (RECOLOCADO AQUI! ) -->
-        <section style="background: #252529; padding: 25px; border-radius: 15px; margin-bottom: 30px; border: 1px solid #c8a97e;">
-            <h2 style="color: #c8a97e; margin-bottom: 15px; font-size: 18px; font-family: 'Montserrat', sans-serif;">+ Adicionar Nova Peça</h2>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <input type="text" id="nomePeca" placeholder="Nome da peça" style="flex: 1; min-width: 150px; padding: 12px; border-radius: 8px; border: none; background: #1c1c1f; color: #fff;">
-                <select id="categoriaPeca" style="padding: 12px; border-radius: 8px; border: none; background: #1c1c1f; color: #fff;">
-                    <option value="Camisa">Camisa</option>
-                    <option value="Calça">Calça</option>
-                    <option value="Sapato">Sapato</option>
-                    <option value="Bolsa">Bolsa</option>
-                </select>
-                <input type="text" id="imagemPeca" placeholder="Caminho (ex: img/foto.jpg)" style="flex: 1; min-width: 150px; padding: 12px; border-radius: 8px; border: none; background: #1c1c1f; color: #fff;">
-                <button onclick="adicionarNovaRoupa()" style="background: #c8a97e; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s;">SALVAR</button>
+        <h1 style="font-family: 'Cormorant Garamond', serif; color: #c8a97e; font-size: 42px; margin-bottom: 30px;">Inventário</h1>
+        
+        <!-- FORMULÁRIO COM AS CORES DO SITE -->
+        <section style="background: #fdfbf7; padding: 30px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #e8d5b5; box-shadow: 0 4px 15px rgba(0,0,0,0.05 );">
+            <h2 style="color: #c8a97e; font-family: 'Cormorant Garamond', serif; margin-bottom: 20px; font-size: 24px;">+ Adicionar Nova Peça</h2>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <input type="text" id="nomePeca" placeholder="Nome da peça (ex: Vestido Gala)" 
+                       style="flex: 1; min-width: 200px; padding: 12px; border-radius: 10px; border: 1px solid #e8d5b5; background: #fff; outline: none; font-family: 'Montserrat', sans-serif;">
+                
+                <input type="text" id="imagemPeca" placeholder="Caminho da imagem (ex: img/vestido.jpg)" 
+                       style="flex: 1; min-width: 200px; padding: 12px; border-radius: 10px; border: 1px solid #e8d5b5; background: #fff; outline: none; font-family: 'Montserrat', sans-serif;">
+                
+                <button onclick="adicionarNovaRoupa()" 
+                        style="background: #c8a97e; color: #fff; padding: 12px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
+                    Salvar Peça
+                </button>
             </div>
         </section>
 
-        <!-- BUSCA -->
-        <input type="text" id="busca" class="search-input" placeholder="Pesquisar no closet..." style="width: 100%; padding: 15px; border-radius: 10px; margin-bottom: 25px; background: #252529; color: #fff; border: 1px solid #444;">
-
-        <!-- GRID DE ROUPAS -->
         <div class="closet-grid" id="inventarioGrid"></div>
     </main>
 </div>
 
 <script src="script.js"></script>
 <script>
-    feather.replace();
-
-    // Função para salvar
     function adicionarNovaRoupa() {
         const nome = document.getElementById('nomePeca').value;
-        const categoria = document.getElementById('categoriaPeca').value;
         const imagem = document.getElementById('imagemPeca').value;
-
+        
         if (nome && imagem) {
             const lista = JSON.parse(localStorage.getItem('roupas')) || [];
-            lista.push({ nome: nome, categoria: categoria, imagem: imagem, favorita: false });
+            lista.push({ 
+                nome: nome, 
+                categoria: "Nova Peça", 
+                imagem: imagem, 
+                favorita: false 
+            });
             localStorage.setItem('roupas', JSON.stringify(lista));
             
+            // Limpa os campos
             document.getElementById('nomePeca').value = '';
             document.getElementById('imagemPeca').value = '';
             
             // Recarrega a lista na tela
-            if (typeof renderizar === 'function') renderizar();
+            if (typeof renderizar === 'function') {
+                renderizar();
+            }
             alert('Peça adicionada com sucesso!');
         } else {
-            alert('Por favor, preencha o nome e a imagem.');
+            alert('Por favor, preencha o nome e o caminho da imagem.');
         }
     }
 </script>

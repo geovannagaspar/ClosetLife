@@ -1,101 +1,472 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda | ClosetLife</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>Agenda | ClosetLife</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+/>
+
+<script src="https://unpkg.com/feather-icons"></script>
+
 </head>
+
 <body>
-    <div class="dashboard">
-        <aside class="sidebar">
-            <div class="logo">ClosetLife</div>
-            <nav class="menu">
-                <a href="index.html"><i data-feather="grid"></i>Dashboard</a>
-                <a href="inventario.html"><i data-feather="shopping-bag"></i>Inventário</a>
-                <a href="agenda.html" class="active"><i data-feather="calendar"></i>Agenda</a>
-                <a href="favoritos.html"><i data-feather="heart"></i>Favoritos</a>
-                <a href="financeiro.html"><i data-feather="dollar-sign"></i>Financeiro</a>
-            </nav>
-        </aside>
 
-        <main class="main-content">
-            <header class="topbar">
-                <h1>Agenda</h1>
-                <p>Planeje seus looks para a semana</p>
-            </header>
+<div class="dashboard">
 
-            <section class="card" style="padding: 30px; margin-bottom: 40px;">
-                <h2 style="color: var(--gold); font-family: 'Cormorant Garamond', serif; margin-bottom: 20px; font-size: 28px;">+ Agendar Look</h2>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <input type="text" id="eventoNome" placeholder="Evento (ex: Jantar, Trabalho)" 
-                           style="flex: 1; min-width: 200px; padding: 15px; border-radius: 12px; border: 1px solid var(--border); background: #fff; outline: none; font-family: 'Montserrat', sans-serif;">
-                    
-                    <input type="date" id="eventoData" 
-                           style="flex: 1; min-width: 200px; padding: 15px; border-radius: 12px; border: 1px solid var(--border); background: #fff; outline: none; font-family: 'Montserrat', sans-serif;">
-                    
-                    <button onclick="agendarEvento()" 
-                            style="background: var(--gold); color: #fff; padding: 15px 30px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
-                        Agendar
-                    </button>
-                </div>
-            </section>
+<!-- SIDEBAR -->
 
-            <div class="closet-grid" id="agendaGrid"></div>
-        </main>
-    </div>
+<aside class="sidebar">
 
-    <script>
-        feather.replace();
+<div class="logo">
+ClosetLife
+</div>
 
-        function agendarEvento() {
-            const nome = document.getElementById('eventoNome').value;
-            const data = document.getElementById('eventoData').value;
-            
-            if (nome && data) {
-                const eventos = JSON.parse(localStorage.getItem('agenda')) || [];
-                eventos.push({ nome, data });
-                localStorage.setItem('agenda', JSON.stringify(eventos));
-                
-                document.getElementById('eventoNome').value = '';
-                document.getElementById('eventoData').value = '';
-                
-                renderizarAgenda();
-                alert('Evento agendado!');
-            } else {
-                alert('Preencha todos os campos.');
-            }
-        }
+<nav class="menu">
 
-        function renderizarAgenda() {
-            const eventos = JSON.parse(localStorage.getItem('agenda')) || [];
-            const grid = document.getElementById('agendaGrid');
-            grid.innerHTML = '';
+<a href="index.html">
+<i data-feather="grid"></i>
+<span>Dashboard</span>
+</a>
 
-            eventos.forEach((ev, i) => {
-                const card = document.createElement('div');
-                card.className = 'item-card';
-                card.style.padding = '20px';
-                card.innerHTML = `
-                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold);">${ev.nome}</h3>
-                    <p style="font-family: 'Montserrat', sans-serif; color: var(--soft);">${ev.data}</p>
-                    <button onclick="removerEvento(${i})" class="remove-btn">Remover</button>
-                `;
-                grid.appendChild(card);
-            });
-        }
+<a href="inventario.html">
+<i data-feather="shopping-bag"></i>
+<span>Inventário</span>
+</a>
 
-        function removerEvento(i) {
-            const eventos = JSON.parse(localStorage.getItem('agenda')) || [];
-            eventos.splice(i, 1);
-            localStorage.setItem('agenda', JSON.stringify(eventos));
-            renderizarAgenda();
-        }
+<a
+href="agenda.html"
+class="active"
+>
+<i data-feather="calendar"></i>
+<span>Agenda</span>
+</a>
 
-        renderizarAgenda();
-    </script>
+<a href="favoritos.html">
+<i data-feather="heart"></i>
+<span>Favoritos</span>
+</a>
+
+<a href="financeiro.html">
+<i data-feather="dollar-sign"></i>
+<span>Financeiro</span>
+</a>
+
+<a href="documentacao.html">
+<i data-feather="book-open"></i>
+<span>Documentação</span>
+</a>
+
+<a href="uml.html">
+<i data-feather="git-branch"></i>
+<span>UML</span>
+</a>
+
+</nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main-content">
+
+<!-- TOPO -->
+
+<header class="topbar">
+
+<div>
+
+<h1>
+Agenda
+</h1>
+
+<p>
+Organize seus looks e tarefas ✨
+</p>
+
+</div>
+
+</header>
+
+<!-- FORM -->
+
+<div
+class="card"
+style="margin-bottom:30px;"
+>
+
+<!-- TÍTULO MELHORADO -->
+
+<div
+style="
+display:flex;
+align-items:center;
+gap:14px;
+margin-bottom:25px;
+"
+>
+
+<div
+style="
+width:55px;
+height:55px;
+border-radius:18px;
+background:
+linear-gradient(
+135deg,
+#a7bfd3,
+#c8a27c
+);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+"
+>
+
+<i data-feather="plus"></i>
+
+</div>
+
+<div>
+
+<h2
+style="
+font-size:28px;
+margin-bottom:4px;
+"
+>
+Nova tarefa
+</h2>
+
+<p style="color:var(--soft);">
+Organize seus looks e compromissos
+</p>
+
+</div>
+
+</div>
+
+<!-- INPUTS -->
+
+<input
+type="text"
+id="titulo"
+placeholder="Nome da tarefa"
+class="search-input"
+>
+
+<input
+type="date"
+id="data"
+class="search-input"
+>
+
+<select
+id="status"
+class="search-input"
+>
+
+<option value="">
+Status da tarefa
+</option>
+
+<option>
+Pendente
+</option>
+
+<option>
+Em andamento
+</option>
+
+<option>
+Concluído
+</option>
+
+</select>
+
+<textarea
+id="descricao"
+placeholder="Descrição..."
+class="search-input"
+style="
+height:120px;
+resize:none;
+font-family:inherit;
+"
+></textarea>
+
+<button
+onclick="salvarTarefa()"
+class="add-btn"
+>
+
++ Nova tarefa
+
+</button>
+
+</div>
+
+<!-- GRID -->
+
+<div
+class="closet-grid"
+id="agendaGrid"
+></div>
+
+</main>
+
+</div>
+
+<script>
+
+feather.replace();
+
+function pegarTarefas(){
+
+return JSON.parse(
+localStorage.getItem('tarefas')
+) || [];
+
+}
+
+function salvarStorage(lista){
+
+localStorage.setItem(
+'tarefas',
+JSON.stringify(lista)
+);
+
+}
+
+function salvarTarefa(){
+
+const titulo =
+document.getElementById('titulo').value;
+
+const data =
+document.getElementById('data').value;
+
+const status =
+document.getElementById('status').value;
+
+const descricao =
+document.getElementById('descricao').value;
+
+if(
+!titulo ||
+!data ||
+!status ||
+!descricao
+){
+
+alert('Preencha todos os campos.');
+
+return;
+
+}
+
+const tarefas =
+pegarTarefas();
+
+tarefas.push({
+
+titulo,
+data,
+status,
+descricao,
+feito:false
+
+});
+
+salvarStorage(tarefas);
+
+renderizar();
+
+limpar();
+
+}
+
+function toggleChecklist(index){
+
+const tarefas =
+pegarTarefas();
+
+tarefas[index].feito =
+!tarefas[index].feito;
+
+salvarStorage(tarefas);
+
+renderizar();
+
+}
+
+function removerTarefa(index){
+
+const tarefas =
+pegarTarefas();
+
+tarefas.splice(index,1);
+
+salvarStorage(tarefas);
+
+renderizar();
+
+}
+
+function renderizar(){
+
+const grid =
+document.getElementById('agendaGrid');
+
+const tarefas =
+pegarTarefas();
+
+grid.innerHTML = '';
+
+if(tarefas.length === 0){
+
+grid.innerHTML = `
+
+<div class="empty-state">
+
+<h2>
+Nenhuma tarefa cadastrada
+</h2>
+
+<p style="margin-top:10px;">
+Adicione uma nova tarefa na agenda.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+tarefas.forEach((tarefa,index)=>{
+
+const card =
+document.createElement('div');
+
+card.classList.add('card');
+
+card.innerHTML = `
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+"
+>
+
+<h2
+style="
+font-size:24px;
+text-decoration:
+${tarefa.feito ? 'line-through' : 'none'};
+"
+>
+${tarefa.titulo}
+</h2>
+
+<input
+type="checkbox"
+${tarefa.feito ? 'checked' : ''}
+onclick="toggleChecklist(${index})"
+style="
+width:20px;
+height:20px;
+cursor:pointer;
+"
+>
+
+</div>
+
+<p
+style="
+margin-bottom:12px;
+color:var(--gold);
+font-weight:600;
+"
+>
+
+${tarefa.status}
+
+</p>
+
+<p style="margin-bottom:20px;">
+${tarefa.descricao}
+</p>
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+"
+>
+
+<small style="color:var(--soft);">
+${tarefa.data}
+</small>
+
+<button
+onclick="removerTarefa(${index})"
+class="remove-btn"
+style="
+width:auto;
+padding:10px 14px;
+border-radius:12px;
+"
+>
+
+Remover
+
+</button>
+
+</div>
+
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+function limpar(){
+
+document.getElementById('titulo').value = '';
+
+document.getElementById('data').value = '';
+
+document.getElementById('status').value = '';
+
+document.getElementById('descricao').value = '';
+
+}
+
+renderizar();
+
+</script>
+
 </body>
 </html>

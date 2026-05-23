@@ -3,7 +3,7 @@
 
 <head>
 
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
 
   <meta
     name="viewport"
@@ -12,8 +12,10 @@
 
   <title>UML | ClosetLife</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css"/>
 
+  <!-- FONTES -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -24,6 +26,7 @@
     rel="stylesheet"
   />
 
+  <!-- ÍCONES -->
   <script src="https://unpkg.com/feather-icons"></script>
 
 </head>
@@ -31,6 +34,8 @@
 <body>
 
 <div class="dashboard">
+
+  <!-- SIDEBAR -->
 
   <aside class="sidebar">
 
@@ -82,6 +87,8 @@
 
   </aside>
 
+  <!-- MAIN -->
+
   <main class="main-content">
 
     <header class="topbar">
@@ -100,35 +107,37 @@
 
     </header>
 
-    <section class="card doc-section">
+    <!-- VISÃO GERAL -->
 
-      <h2>
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
         1. Visão Geral do Sistema
       </h2>
 
-      <p>
+      <p style="line-height:1.9;">
 
-        O ClosetLife é uma aplicação web desenvolvida
+        O ClosetLife é um sistema web desenvolvido
         para gerenciamento digital de roupas,
-        favoritos, agenda pessoal e controle
-        visual do closet do usuário.
+        favoritos, agenda e organização pessoal.
 
-        A modelagem UML foi utilizada para representar
-        visualmente a estrutura do sistema,
-        seus componentes, fluxos de funcionamento
-        e organização arquitetural.
+        O objetivo da modelagem UML é representar
+        visualmente a estrutura, os fluxos e
+        os componentes do sistema.
 
       </p>
 
     </section>
 
-    <section class="card doc-section">
+    <!-- ESCOPO -->
 
-      <h2>
-        2. Escopo da Modelagem
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        Escopo da Modelagem
       </h2>
 
-      <ul>
+      <ul style="line-height:2; padding-left:20px;">
 
         <li>Diagrama de Casos de Uso</li>
 
@@ -140,212 +149,177 @@
 
         <li>Diagrama de Componentes</li>
 
-        <li>Diagrama de Contexto</li>
-
       </ul>
 
     </section>
 
-    <section class="card doc-section">
+    <!-- CASOS DE USO -->
 
-      <h2>
-        3. Diagrama de Casos de Uso
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        2. Diagrama de Casos de Uso
       </h2>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+        <p style="line-height:2;">
 
-                👤 Usuário
+          👤 Usuário <br><br>
 
-        ┌─────────────────────┐
-        │ Adicionar roupas    │
-        └─────────────────────┘
+          • Adicionar roupas <br>
+          • Remover roupas <br>
+          • Favoritar peças <br>
+          • Visualizar agenda <br>
+          • Acessar financeiro <br>
+          • Gerenciar inventário <br>
 
-        ┌─────────────────────┐
-        │ Remover roupas      │
-        └─────────────────────┘
-
-        ┌─────────────────────┐
-        │ Favoritar peças     │
-        └─────────────────────┘
-
-        ┌─────────────────────┐
-        │ Visualizar agenda   │
-        └─────────────────────┘
-
-        ┌─────────────────────┐
-        │ Acessar financeiro  │
-        └─────────────────────┘
-
-        ┌─────────────────────┐
-        │ Gerenciar closet    │
-        └─────────────────────┘
-
-</pre>
+        </p>
 
       </div>
 
     </section>
 
-    <section class="card doc-section">
+    <!-- CLASSES -->
 
-      <h2>
-        4. Diagrama de Classes
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        3. Diagrama de Classes
       </h2>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+        <h3 style="margin-bottom:15px;">
+          Classe: Roupa
+        </h3>
 
-┌─────────────────────┐
-│ Classe: Roupa       │
-├─────────────────────┤
-│ + nome              │
-│ + categoria         │
-│ + imagem            │
-│ + favorita          │
-├─────────────────────┤
-│ + salvar()          │
-│ + remover()         │
-│ + favoritar()       │
-└─────────────────────┘
+        <p style="line-height:2;">
 
-</pre>
+          + nome <br>
+          + categoria <br>
+          + imagem <br>
+          + favorita <br>
+
+        </p>
 
       </div>
 
       <br>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+        <h3 style="margin-bottom:15px;">
+          Classe: Agenda
+        </h3>
 
-┌─────────────────────┐
-│ Classe: Agenda      │
-├─────────────────────┤
-│ + data              │
-│ + horario           │
-│ + evento            │
-├─────────────────────┤
-│ + adicionarEvento() │
-│ + removerEvento()   │
-└─────────────────────┘
+        <p style="line-height:2;">
 
-</pre>
+          + data <br>
+          + horário <br>
+          + evento <br>
+
+        </p>
 
       </div>
 
       <br>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+        <h3 style="margin-bottom:15px;">
+          Classe: Financeiro
+        </h3>
 
-┌─────────────────────┐
-│ Classe: Financeiro  │
-├─────────────────────┤
-│ + valor             │
-│ + categoria         │
-│ + descricao         │
-├─────────────────────┤
-│ + adicionarGasto()  │
-│ + calcularTotal()   │
-└─────────────────────┘
+        <p style="line-height:2;">
 
-</pre>
+          + valor <br>
+          + categoria <br>
+          + descrição <br>
+
+        </p>
 
       </div>
 
     </section>
 
-    <section class="card doc-section">
+    <!-- SEQUÊNCIA -->
 
-      <h2>
-        5. Diagrama de Sequência
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        4. Diagrama de Sequência
       </h2>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+        <p style="line-height:2;">
 
-Usuário
-   │
-   ▼
-Interface HTML
-   │
-   ▼
-JavaScript recebe dados
-   │
-   ▼
-Processamento da informação
-   │
-   ▼
-LocalStorage salva dados
-   │
-   ▼
-Inventário atualiza interface
+          Usuário adiciona roupa <br>
+          ↓ <br>
+          Interface recebe dados <br>
+          ↓ <br>
+          JavaScript processa <br>
+          ↓ <br>
+          LocalStorage salva <br>
+          ↓ <br>
+          Inventário atualiza <br>
 
-</pre>
+        </p>
 
       </div>
 
     </section>
 
-    <section class="card doc-section">
+    <!-- ATIVIDADE -->
 
-      <h2>
-        6. Diagrama de Atividade
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        5. Diagrama de Atividade
       </h2>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+        <p style="line-height:2;">
 
-[ Início ]
-      │
-      ▼
-Usuário acessa sistema
-      │
-      ▼
-Escolhe funcionalidade
-      │
-      ▼
-Adiciona roupa
-      │
-      ▼
-Sistema valida dados
-      │
-      ▼
-LocalStorage salva
-      │
-      ▼
-Interface atualiza
-      │
-      ▼
-[ Fim ]
+          Início <br>
+          ↓ <br>
+          Usuário acessa sistema <br>
+          ↓ <br>
+          Escolhe funcionalidade <br>
+          ↓ <br>
+          Adiciona roupa <br>
+          ↓ <br>
+          Sistema salva alterações <br>
+          ↓ <br>
+          Fim <br>
 
-</pre>
+        </p>
 
       </div>
 
     </section>
 
-    <section class="card doc-section">
+    <!-- COMPONENTES -->
 
-      <h2>
-        7. Diagrama de Componentes
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        6. Diagrama de Componentes
       </h2>
 
-      <table class="doc-table">
+      <table style="width:100%; line-height:2;">
 
         <tr>
 
-          <th>Componente</th>
+          <td>
+            <strong>Componente</strong>
+          </td>
 
-          <th>Tecnologia</th>
-
-          <th>Responsabilidade</th>
+          <td>
+            <strong>Tecnologia</strong>
+          </td>
 
         </tr>
 
@@ -355,8 +329,6 @@ Interface atualiza
 
           <td>HTML5 + CSS3</td>
 
-          <td>Interface visual do sistema</td>
-
         </tr>
 
         <tr>
@@ -365,17 +337,13 @@ Interface atualiza
 
           <td>JavaScript</td>
 
-          <td>Processamento das funcionalidades</td>
-
         </tr>
 
         <tr>
 
-          <td>Persistência</td>
+          <td>Armazenamento</td>
 
           <td>LocalStorage</td>
-
-          <td>Armazenamento dos dados</td>
 
         </tr>
 
@@ -383,31 +351,63 @@ Interface atualiza
 
     </section>
 
-    <section class="card doc-section">
+    <!-- CONTEXTO -->
 
-      <h2>
-        8. Diagrama de Contexto do Sistema
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        7. Diagrama de Contexto do Sistema
       </h2>
 
-      <div class="uml-box">
+      <div class="empty-state">
 
-<pre class="doc-code">
+<pre style="text-align:left; line-height:2; white-space:pre-wrap;">
 
-             👤 Usuário
-                    │
-                    ▼
-      ┌────────────────────────┐
-      │     ClosetLife         │
-      │  Sistema Web Frontend  │
-      └────────────────────────┘
-                    │
-      ┌─────────────┼─────────────┐
-      ▼                           ▼
+<<person>>
+👤 Usuário
+Pessoa que utiliza o ClosetLife para
+organizar roupas e favoritos.
 
-┌──────────────┐          ┌──────────────┐
-│ JavaScript   │          │ LocalStorage │
-│ Regras       │          │ Persistência │
-└──────────────┘          └──────────────┘
+<<person>>
+🛍️ Cliente
+Usuário que gerencia seu closet digital.
+
+<<person>>
+⚙️ Administrador
+Responsável pela manutenção do sistema.
+
+<<container>>
+🖥️ Aplicação Web
+[HTML5/CSS3/JavaScript]
+Interface principal acessada pelo navegador.
+
+<<container>>
+⚙️ Sistema de Lógica
+[JavaScript]
+Responsável pelas funcionalidades do sistema.
+
+<<container_db>>
+💾 LocalStorage
+[Browser Storage]
+Armazena roupas, favoritos e agenda.
+
+📦 ClosetLife System
+[SYSTEM]
+
+Utiliza
+[HTML/CSS]
+
+Gerencia
+[JavaScript]
+
+Armazena
+[LocalStorage]
+
+Renderiza Interface
+[DOM]
+
+Atualiza Dados
+[JSON]
 
 </pre>
 
@@ -415,50 +415,25 @@ Interface atualiza
 
     </section>
 
-    <section class="card doc-section">
+    <!-- RESUMO -->
 
-      <h2>
-        9. Arquitetura em Camadas
+    <section class="card" style="margin-bottom:25px;">
+
+      <h2 style="margin-bottom:18px;">
+        8. Resumo da Modelagem UML
       </h2>
 
-      <div class="uml-box">
-
-<pre class="doc-code">
-
-┌──────────────────────────┐
-│ Camada de Apresentação   │
-│ HTML5 + CSS3             │
-└──────────────────────────┘
-
-┌──────────────────────────┐
-│ Camada de Lógica         │
-│ JavaScript               │
-└──────────────────────────┘
-
-┌──────────────────────────┐
-│ Camada de Persistência   │
-│ LocalStorage             │
-└──────────────────────────┘
-
-</pre>
-
-      </div>
-
-    </section>
-
-    <section class="card doc-section">
-
-      <h2>
-        10. Resumo da Modelagem UML
-      </h2>
-
-      <table class="doc-table">
+      <table style="width:100%; line-height:2;">
 
         <tr>
 
-          <th>Diagrama</th>
+          <td>
+            <strong>Diagrama</strong>
+          </td>
 
-          <th>Objetivo</th>
+          <td>
+            <strong>Objetivo</strong>
+          </td>
 
         </tr>
 
@@ -466,7 +441,7 @@ Interface atualiza
 
           <td>Casos de Uso</td>
 
-          <td>Representar funcionalidades do sistema</td>
+          <td>Representar funcionalidades</td>
 
         </tr>
 
@@ -474,7 +449,7 @@ Interface atualiza
 
           <td>Classes</td>
 
-          <td>Representar estrutura das entidades</td>
+          <td>Estrutura do sistema</td>
 
         </tr>
 
@@ -482,7 +457,7 @@ Interface atualiza
 
           <td>Sequência</td>
 
-          <td>Representar fluxo das operações</td>
+          <td>Fluxo das operações</td>
 
         </tr>
 
@@ -490,7 +465,7 @@ Interface atualiza
 
           <td>Atividade</td>
 
-          <td>Representar fluxo de execução</td>
+          <td>Fluxos do sistema</td>
 
         </tr>
 
@@ -498,15 +473,7 @@ Interface atualiza
 
           <td>Componentes</td>
 
-          <td>Representar arquitetura do sistema</td>
-
-        </tr>
-
-        <tr>
-
-          <td>Contexto</td>
-
-          <td>Representar interação entre elementos</td>
+          <td>Arquitetura geral</td>
 
         </tr>
 
@@ -514,25 +481,25 @@ Interface atualiza
 
     </section>
 
-    <section class="card doc-section">
+    <!-- BENEFÍCIOS -->
 
-      <h2>
-        11. Benefícios da UML
+    <section class="card">
+
+      <h2 style="margin-bottom:18px;">
+        Benefícios da UML
       </h2>
 
-      <ul>
+      <ul style="line-height:2; padding-left:20px;">
 
-        <li>Melhor organização estrutural do projeto</li>
+        <li>Melhor organização do projeto</li>
 
-        <li>Facilidade de manutenção do sistema</li>
+        <li>Facilidade de manutenção</li>
 
-        <li>Documentação técnica mais completa</li>
+        <li>Documentação visual do sistema</li>
 
-        <li>Maior clareza na arquitetura da aplicação</li>
+        <li>Maior clareza na estrutura</li>
 
         <li>Facilidade para futuras melhorias</li>
-
-        <li>Padronização do desenvolvimento</li>
 
       </ul>
 

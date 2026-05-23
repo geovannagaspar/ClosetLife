@@ -1,62 +1,388 @@
-const closetGrid = document.getElementById("closetGrid") || document.getElementById("inventarioGrid");
+const modal = document.getElementById('modalOverlay');
 
-function pegarRoupas() {
-    let lista = JSON.parse(localStorage.getItem("roupas"));
-    if (!lista || lista.length === 0) {
-        lista = [
-            { nome: "Baby Tee", categoria: "Camisa", imagem: "img/baby.jpg", favorita: false },
-            { nome: "Bolsa Baguette", categoria: "Bolsa", imagem: "img/bolsa.jpg", favorita: false },
-            { nome: "Calça Wide Leg", categoria: "Calça", imagem: "img/calca.jpg", favorita: false },
-            { nome: "Camisa de Linho", categoria: "Camisa", imagem: "img/camisa.jpg", favorita: false },
-            { nome: "Camisa Masculina", categoria: "Camisa", imagem: "img/camisamascu.jpg", favorita: false },
-            { nome: "Tênis Adidas Samba", categoria: "Sapato", imagem: "img/tenis.jpg", favorita: false },
-            { nome: "Vestido Midi", categoria: "Vestido", imagem: "img/vestidomidi.jpg", favorita: false },
-            { nome: "Jaqueta Jeans", categoria: "Casaco", imagem: "img/jaquetajeans.jpg", favorita: false },
-            { nome: "Saia Plissada", categoria: "Saia", imagem: "img/saiaplissada.jpg", favorita: false },
-            { nome: "Blusa de Seda", categoria: "Blusa", imagem: "img/blusaseda.jpg", favorita: false }
-        ];
-        localStorage.setItem("roupas", JSON.stringify(lista));
-    }
-    return lista;
+const abrirModal =
+  document.getElementById('abrirModal');
+
+const fecharModal =
+  document.getElementById('fecharModal');
+
+const salvarRoupa =
+  document.getElementById('salvarRoupa');
+
+const closetGrid =
+  document.getElementById('closetGrid');
+
+const totalRoupas =
+  document.getElementById('totalRoupas');
+
+const totalCategorias =
+  document.getElementById('totalCategorias');
+
+/* =====================================
+CLASSE POO
+===================================== */
+
+class Roupa{
+
+  constructor(
+    nome,
+    categoria,
+    imagem
+  ){
+
+    this.nome = nome;
+    this.categoria = categoria;
+    this.imagem = imagem;
+    this.favorita = false;
+
+  }
+
 }
 
-function renderizar() {
-    const roupas = pegarRoupas();
-    if (!closetGrid) return;
-    closetGrid.innerHTML = "";
-    roupas.forEach((item, i) => {
-        const card = document.createElement("div");
-        card.classList.add("item-card");
-        card.innerHTML = `
-            <img src="${item.imagem}" onerror="this.src=\'https://via.placeholder.com/150\'" alt="${item.nome}">
-            <div class="item-content">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h3>${item.nome}</h3>
-                    <button onclick="favoritar(${i} )" style="border:none; background:none; cursor:pointer; font-size:22px;">
-                        ${item.favorita ? "❤️" : "🤍"}
-                    </button>
-                </div>
-                <p class="item-category">${item.categoria}</p>
-                <button onclick="removerPeca(${i})" class="remove-btn" style="margin-top:15px; border-radius:12px;">Remover</button>
-            </div>`;
-        closetGrid.appendChild(card);
+/* =====================================
+STORAGE
+===================================== */
+
+function pegarRoupas(){
+
+  return JSON.parse(
+    localStorage.getItem('roupas')
+  ) || [];
+
+}
+
+function salvarRoupasStorage(lista){
+
+  localStorage.setItem(
+    'roupas',
+    JSON.stringify(lista)
+  );
+
+}
+
+/* =====================================
+MODAL
+===================================== */
+
+abrirModal.addEventListener('click', () => {
+
+  modal.style.display = 'flex';
+
+});
+
+fecharModal.addEventListener('click', fechar);
+
+modal.addEventListener('click', (e) => {
+
+  if(e.target === modal){
+
+    fechar();
+
+  }
+
+});
+
+function fechar(){
+
+  modal.style.display = 'none';
+
+}
+
+/* =====================================
+RENDER
+===================================== */
+
+function renderizar(){
+
+  const roupas = pegarRoupas();
+
+  closetGrid.innerHTML = '';
+
+  totalRoupas.textContent =
+    roupas.length;
+
+  const categorias =
+    [...new Set(
+      roupas.map(r => r.categoria)
+    )];
+
+  totalCategorias.textContent =
+    categorias.length;
+
+  /* EMPTY */
+
+  if(roupas.length === 0){
+
+    closetGrid.innerHTML = `
+
+      <div class="empty-state">
+
+        <h3>
+          Seu closet está vazio
+        </h3>
+
+        <p>
+          Adicione sua primeira peça.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  /* RENDER ROUPAS */
+
+  roupas.forEach((roupa,index) => {
+
+    const card =
+      document.createElement('div');
+
+    card.classList.add('item-card');
+
+    card.innerHTML = `
+
+      <img src="${roupa.imagem}">
+
+      <div class="item-content">
+
+        <div
+          style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+          "
+        >
+
+          <h3>
+            ${roupa.nome}
+          </h3>
+
+          <button
+            onclick="favoritarRoupa(${index})"
+
+            style="
+              border:none;
+              background:none;
+              cursor:pointer;
+              font-size:22px;
+            "
+          >
+
+            ${roupa.favorita ? '❤️' : '🤍'}
+
+          </button>
+
+        </div>
+
+        <div class="item-category">
+
+          ${roupa.categoria}
+
+        </div>
+
+      </div>
+
+      <button
+        class="remove-btn"
+        onclick="removerRoupa(${index})"
+      >
+        Remover
+      </button>
+
+    `;
+
+    closetGrid.appendChild(card);
+
+  });
+
+}
+
+/* =====================================
+SALVAR ROUPA
+===================================== */
+
+salvarRoupa.addEventListener('click', () => {
+
+  const nome =
+    document.getElementById('nomeRoupa').value;
+
+  const categoria =
+    document.getElementById('categoriaRoupa').value;
+
+  const imagemInput =
+    document.getElementById('imagemRoupa');
+
+  const arquivo =
+    imagemInput.files[0];
+
+  /* VALIDAÇÃO */
+
+  if(!nome || !categoria || !arquivo){
+
+    Swal.fire({
+
+      title:'Oops!',
+
+      text:'Preencha todos os campos.',
+
+      icon:'warning',
+
+      confirmButtonColor:'#c8a97e',
+
+      background:'#1c1c1f',
+
+      color:'#ffffff'
+
     });
-}
 
-function favoritar(indice) {
-    const lista = pegarRoupas();
-    lista[indice].favorita = !lista[indice].favorita;
-    localStorage.setItem("roupas", JSON.stringify(lista));
+    return;
+
+  }
+
+  const leitor =
+    new FileReader();
+
+  leitor.onload = function(e){
+
+    const novaRoupa =
+      new Roupa(
+
+        nome,
+        categoria,
+        e.target.result
+
+      );
+
+    const roupas =
+      pegarRoupas();
+
+    roupas.push(novaRoupa);
+
+    salvarRoupasStorage(
+      roupas
+    );
+
     renderizar();
+
+    limparFormulario();
+
+    /* ALERTA SUCESSO */
+
+    Swal.fire({
+
+      title:'Perfeito ✨',
+
+      text:'Peça adicionada ao closet.',
+
+      icon:'success',
+
+      confirmButtonColor:'#c8a97e',
+
+      background:'#1c1c1f',
+
+      color:'#ffffff'
+
+    });
+
+    fechar();
+
+  };
+
+  leitor.readAsDataURL(
+    arquivo
+  );
+
+});
+
+/* =====================================
+REMOVER
+===================================== */
+
+function removerRoupa(index){
+
+  const roupas =
+    pegarRoupas();
+
+  roupas.splice(index,1);
+
+  salvarRoupasStorage(
+    roupas
+  );
+
+  renderizar();
+
+  Swal.fire({
+
+    title:'Removido',
+
+    text:'A peça foi removida.',
+
+    icon:'info',
+
+    confirmButtonColor:'#c8a97e',
+
+    background:'#1c1c1f',
+
+    color:'#ffffff'
+
+  });
+
 }
 
-function removerPeca(indice) {
-    if (confirm("Deseja remover esta peça?")) {
-        const lista = pegarRoupas();
-        lista.splice(indice, 1);
-        localStorage.setItem("roupas", JSON.stringify(lista));
-        renderizar();
-    }
+/* =====================================
+FAVORITOS
+===================================== */
+
+function favoritarRoupa(index){
+
+  const roupas =
+    pegarRoupas();
+
+  roupas[index].favorita =
+    !roupas[index].favorita;
+
+  salvarRoupasStorage(
+    roupas
+  );
+
+  renderizar();
+
 }
 
-document.addEventListener("DOMContentLoaded", renderizar);
+/* =====================================
+LIMPAR
+===================================== */
+
+function limparFormulario(){
+
+  document.getElementById(
+    'nomeRoupa'
+  ).value = '';
+
+  document.getElementById(
+    'categoriaRoupa'
+  ).value = '';
+
+  document.getElementById(
+    'imagemRoupa'
+  ).value = '';
+
+}
+
+/* =====================================
+INIT
+===================================== */
+
+document.addEventListener(
+  'DOMContentLoaded',
+
+  () => {
+
+    renderizar();
+
+  }
+
+);

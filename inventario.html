@@ -1,82 +1,225 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventário | ClosetLife</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Inventário | ClosetLife</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- FONTES -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ÍCONES -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
 </head>
+
 <body>
-    <div class="dashboard">
-        <aside class="sidebar">
-            <div class="logo">ClosetLife</div>
-            <nav class="menu">
-                <a href="index.html"><i data-feather="grid"></i>Dashboard</a>
-                <a href="inventario.html" class="active"><i data-feather="shopping-bag"></i>Inventário</a>
-                <a href="agenda.html"><i data-feather="calendar"></i>Agenda</a>
-                <a href="favoritos.html"><i data-feather="heart"></i>Favoritos</a>
-                <a href="financeiro.html"><i data-feather="dollar-sign"></i>Financeiro</a>
-            </nav>
-        </aside>
 
-        <main class="main-content">
-            <header class="topbar">
-                <h1>Inventário</h1>
-                <p>Gerencie todas as peças do seu closet</p>
-            </header>
-            
-            <section class="card" style="padding: 30px; margin-bottom: 40px;">
-                <h2 style="color: var(--gold); font-family: 'Cormorant Garamond', serif; margin-bottom: 20px; font-size: 28px;">+ Adicionar Nova Peça</h2>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <input type="text" id="nomePeca" placeholder="Nome da peça (ex: Vestido Gala)" 
-                           style="flex: 1; min-width: 200px; padding: 15px; border-radius: 12px; border: 1px solid var(--border); background: #fff; outline: none; font-family: 'Montserrat', sans-serif;">
-                    
-                    <input type="text" id="imagemPeca" placeholder="Caminho da imagem (ex: img/vestido.jpg)" 
-                           style="flex: 1; min-width: 200px; padding: 15px; border-radius: 12px; border: 1px solid var(--border); background: #fff; outline: none; font-family: 'Montserrat', sans-serif;">
-                    
-                    <button onclick="adicionarNovaRoupa()" 
-                            style="background: var(--gold); color: #fff; padding: 15px 30px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
-                        Salvar Peça
-                    </button>
-                </div>
-            </section>
+<div class="dashboard">
 
-            <div class="closet-grid" id="inventarioGrid"></div>
-        </main>
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      ClosetLife
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        feather.replace();
+    <nav class="menu">
 
-        function adicionarNovaRoupa() {
-            const nome = document.getElementById('nomePeca').value;
-            const imagem = document.getElementById('imagemPeca').value;
-            
-            if (nome && imagem) {
-                const lista = JSON.parse(localStorage.getItem('roupas')) || [];
-                lista.push({ 
-                    nome: nome, 
-                    categoria: "Nova Peça", 
-                    imagem: imagem, 
-                    favorita: false 
-                });
-                localStorage.setItem('roupas', JSON.stringify(lista));
-                
-                document.getElementById('nomePeca').value = '';
-                document.getElementById('imagemPeca').value = '';
-                
-                if (typeof renderizar === 'function') {
-                    renderizar();
-                }
-                alert('Peça adicionada com sucesso!');
-            } else {
-                alert('Por favor, preencha todos os campos.');
-            }
-        }
-    </script>
+      <a href="index.html">
+        <i data-feather="grid"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        href="inventario.html"
+        class="active"
+      >
+        <i data-feather="shopping-bag"></i>
+        <span>Inventário</span>
+      </a>
+
+      <a href="agenda.html">
+        <i data-feather="calendar"></i>
+        <span>Agenda</span>
+      </a>
+
+      <a href="favoritos.html">
+        <i data-feather="heart"></i>
+        <span>Favoritos</span>
+      </a>
+
+      <a href="financeiro.html">
+        <i data-feather="dollar-sign"></i>
+        <span>Financeiro</span>
+      </a>
+
+      <a href="documentacao.html">
+        <i data-feather="book-open"></i>
+        <span>Documentação</span>
+      </a>
+
+      <a href="uml.html">
+        <i data-feather="git-branch"></i>
+        <span>UML</span>
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <!-- TOPO -->
+
+    <header class="topbar">
+
+      <div>
+
+        <h1>
+          Inventário
+        </h1>
+
+        <p>
+          Todas as suas peças cadastradas
+        </p>
+
+      </div>
+
+    </header>
+
+    <!-- PESQUISA -->
+
+    <input
+      type="text"
+      id="busca"
+      class="search-input"
+      placeholder="Pesquisar peça..."
+    >
+
+    <!-- GRID -->
+
+    <div
+      class="closet-grid"
+      id="inventarioGrid"
+    ></div>
+
+  </main>
+
+</div>
+
+<script>
+
+  feather.replace();
+
+  function pegarRoupas(){
+
+    return JSON.parse(
+      localStorage.getItem('roupas')
+    ) || [];
+
+  }
+
+  function renderizarInventario(){
+
+    const grid =
+      document.getElementById(
+        'inventarioGrid'
+      );
+
+    const busca =
+      document.getElementById(
+        'busca'
+      ).value.toLowerCase();
+
+    const roupas =
+      pegarRoupas().filter(r =>
+        r.nome
+        .toLowerCase()
+        .includes(busca)
+      );
+
+    grid.innerHTML = '';
+
+    if(roupas.length === 0){
+
+      grid.innerHTML = `
+
+        <div class="empty-state">
+
+          <h2>
+            Nenhuma peça encontrada
+          </h2>
+
+          <p style="margin-top:10px;">
+            Tente pesquisar outro nome.
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    roupas.forEach((roupa) => {
+
+      const card =
+        document.createElement('div');
+
+      card.classList.add('item-card');
+
+      card.innerHTML = `
+
+        <img src="${roupa.imagem}">
+
+        <div class="item-content">
+
+          <h3>
+            ${roupa.nome}
+          </h3>
+
+          <div class="item-category">
+            ${roupa.categoria}
+          </div>
+
+        </div>
+
+      `;
+
+      grid.appendChild(card);
+
+    });
+
+  }
+
+  document
+    .getElementById('busca')
+    .addEventListener(
+      'input',
+      renderizarInventario
+    );
+
+  renderizarInventario();
+
+</script>
+
 </body>
 </html>

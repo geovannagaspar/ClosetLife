@@ -1,4 +1,4 @@
-# Closet Life - Digital Closet System
+# Closet Luxe - Digital Closet System
 
 Sistema web de gerenciamento de closet digital desenvolvido para a disciplina de Engenharia e Qualidade de Software.
 

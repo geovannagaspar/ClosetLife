@@ -1,269 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
-  <meta charset="UTF-8"/>
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-
-  <title>Financeiro | ClosetLife</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- FONTES -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- ÍCONES -->
-  <script src="https://unpkg.com/feather-icons"></script>
-
-  <!-- CHART JS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro | ClosetLife</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">ClosetLife</div>
+            <nav class="menu">
+                <a href="index.html"><i data-feather="grid"></i>Dashboard</a>
+                <a href="inventario.html"><i data-feather="shopping-bag"></i>Inventário</a>
+                <a href="agenda.html"><i data-feather="calendar"></i>Agenda</a>
+                <a href="favoritos.html"><i data-feather="heart"></i>Favoritos</a>
+                <a href="financeiro.html" class="active"><i data-feather="dollar-sign"></i>Financeiro</a>
+            </nav>
+        </aside>
 
-<div class="dashboard">
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Financeiro</h1>
+                <p>Controle de gastos com seu closet</p>
+            </header>
 
-  <!-- SIDEBAR -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                <div class="card" style="padding: 25px;">
+                    <h3 style="color: var(--gold); font-size: 32px; font-family: 'Cormorant Garamond', serif;">R$ 2.450,00</h3>
+                    <p style="color: var(--soft); font-family: 'Montserrat', sans-serif;">Entradas do Mês</p>
+                </div>
+                <div class="card" style="padding: 25px;">
+                    <h3 style="color: var(--gold); font-size: 32px; font-family: 'Cormorant Garamond', serif;">R$ 980,00</h3>
+                    <p style="color: var(--soft); font-family: 'Montserrat', sans-serif;">Gastos do Mês</p>
+                </div>
+                <div class="card" style="padding: 25px;">
+                    <h3 style="color: var(--gold); font-size: 32px; font-family: 'Cormorant Garamond', serif;">R$ 1.470,00</h3>
+                    <p style="color: var(--soft); font-family: 'Montserrat', sans-serif;">Saldo Total</p>
+                </div>
+            </div>
 
-  <aside class="sidebar">
-
-    <div class="logo">
-      ClosetLife
+            <div class="card" style="padding: 30px;">
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: var(--gold); margin-bottom: 25px; font-size: 28px;">Estatísticas Financeiras</h2>
+                <canvas id="financeChart" style="max-height: 350px;"></canvas>
+            </div>
+        </main>
     </div>
 
-    <nav class="menu">
-
-      <a href="index.html">
-        <i data-feather="grid"></i>
-        <span>Dashboard</span>
-      </a>
-
-      <a href="inventario.html">
-        <i data-feather="shopping-bag"></i>
-        <span>Inventário</span>
-      </a>
-
-      <a href="agenda.html">
-        <i data-feather="calendar"></i>
-        <span>Agenda</span>
-      </a>
-
-      <a href="favoritos.html">
-        <i data-feather="heart"></i>
-        <span>Favoritos</span>
-      </a>
-
-      <a
-        href="financeiro.html"
-        class="active"
-      >
-        <i data-feather="dollar-sign"></i>
-        <span>Financeiro</span>
-      </a>
-
-      <a href="documentacao.html">
-        <i data-feather="book-open"></i>
-        <span>Documentação</span>
-      </a>
-
-      <a href="uml.html">
-        <i data-feather="git-branch"></i>
-        <span>UML</span>
-      </a>
-
-    </nav>
-
-  </aside>
-
-  <!-- MAIN -->
-
-  <main class="main-content">
-
-    <!-- TOPO -->
-
-    <header class="topbar">
-
-      <div>
-
-        <h1>
-          Financeiro
-        </h1>
-
-        <p>
-          Controle financeiro do ClosetLife
-        </p>
-
-      </div>
-
-    </header>
-
-    <!-- CARDS -->
-
-    <div class="cards">
-
-      <div class="card">
-
-        <h3>
-          R$ 2.450
-        </h3>
-
-        <p>
-          Entradas do mês
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>
-          R$ 980
-        </h3>
-
-        <p>
-          Gastos do mês
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>
-          R$ 1.470
-        </h3>
-
-        <p>
-          Saldo total
-        </p>
-
-      </div>
-
-    </div>
-
-    <!-- GRÁFICO -->
-
-    <section class="card">
-
-      <h2 style="margin-bottom:25px;">
-        Estatísticas Financeiras
-      </h2>
-
-      <canvas id="financeChart"></canvas>
-
-    </section>
-
-  </main>
-
-</div>
-
-<script>
-
-  feather.replace();
-
-  const ctx =
-    document.getElementById('financeChart');
-
-  new Chart(ctx, {
-
-    type: 'line',
-
-    data: {
-
-      labels: [
-
-        'Jan',
-        'Fev',
-        'Mar',
-        'Abr',
-        'Mai',
-        'Jun'
-
-      ],
-
-      datasets: [
-
-        {
-
-          label:'Entradas',
-
-          data:[
-            500,
-            900,
-            1200,
-            1600,
-            2100,
-            2450
-          ],
-
-          borderWidth:3,
-
-          tension:0.4,
-
-          fill:true
-
-        },
-
-        {
-
-          label:'Gastos',
-
-          data:[
-            200,
-            350,
-            500,
-            650,
-            820,
-            980
-          ],
-
-          borderWidth:3,
-
-          tension:0.4,
-
-          fill:true
-
-        }
-
-      ]
-
-    },
-
-    options: {
-
-      responsive:true,
-
-      plugins: {
-
-        legend: {
-
-          labels: {
-
-            font: {
-
-              size:14
-
+    <script>
+        feather.replace();
+
+        const ctx = document.getElementById('financeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [
+                    {
+                        label: 'Entradas',
+                        data: [500, 900, 1200, 1600, 2100, 2450],
+                        borderColor: '#c8a27c',
+                        backgroundColor: 'rgba(200, 162, 124, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Gastos',
+                        data: [200, 350, 500, 650, 820, 980],
+                        borderColor: '#a7bfd3',
+                        backgroundColor: 'rgba(167, 191, 211, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: { font: { family: 'Montserrat', size: 14 } }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
-
-          }
-
-        }
-
-      }
-
-    }
-
-  });
-
-</script>
-
+        });
+    </script>
 </body>
 </html>

@@ -1,159 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Favoritos | ClosetLife</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <script src="https://unpkg.com/feather-icons"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos | ClosetLife</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
-
 <body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">ClosetLife</div>
+            <nav class="menu">
+                <a href="index.html"><i data-feather="grid"></i>Dashboard</a>
+                <a href="inventario.html"><i data-feather="shopping-bag"></i>Inventário</a>
+                <a href="agenda.html"><i data-feather="calendar"></i>Agenda</a>
+                <a href="favoritos.html" class="active"><i data-feather="heart"></i>Favoritos</a>
+                <a href="financeiro.html"><i data-feather="dollar-sign"></i>Financeiro</a>
+            </nav>
+        </aside>
 
-  <div class="dashboard">
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Favoritos</h1>
+                <p>Suas peças mais amadas</p>
+            </header>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+            <div class="closet-grid" id="favoritosGrid"></div>
+        </main>
+    </div>
 
-      <div class="logo">
-        ClosetLife
-      </div>
+    <script>
+        feather.replace();
 
-      <nav class="menu">
+        function pegarRoupas() {
+            return JSON.parse(localStorage.getItem('roupas')) || [];
+        }
 
-        <a href="index.html">
-          <i data-feather="grid"></i>
-          <span>Dashboard</span>
-        </a>
+        function renderizarFavoritos() {
+            const roupas = pegarRoupas();
+            const favoritas = roupas.filter(r => r.favorita);
+            const grid = document.getElementById('favoritosGrid');
+            grid.innerHTML = '';
 
-        <a href="inventario.html">
-          <i data-feather="shopping-bag"></i>
-          <span>Inventário</span>
-        </a>
+            if (favoritas.length === 0) {
+                grid.innerHTML = `
+                    <div class="card" style="padding: 50px; text-align: center; grid-column: 1/-1;">
+                        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--gold);">Nenhuma peça favorita</h3>
+                        <p style="font-family: 'Montserrat', sans-serif; color: var(--soft);">Favorite roupas no inventário para vê-las aqui.</p>
+                    </div>
+                `;
+                return;
+            }
 
-        <a href="agenda.html">
-          <i data-feather="calendar"></i>
-          <span>Agenda</span>
-        </a>
+            favoritas.forEach((roupa) => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <img src="${roupa.imagem}" onerror="this.src='https://via.placeholder.com/300'">
+                    <div class="item-content">
+                        <h3>${roupa.nome}</h3>
+                        <div class="item-category">${roupa.categoria}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
 
-        <a href="favoritos.html" class="active">
-          <i data-feather="heart"></i>
-          <span>Favoritos</span>
-        </a>
-
-        <a href="financeiro.html">
-          <i data-feather="dollar-sign"></i>
-          <span>Financeiro</span>
-        </a>
-
-      </nav>
-
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main-content">
-
-      <header class="topbar">
-
-        <div>
-          <h1>Favoritos</h1>
-          <p>Suas peças favoritas </p>
-        </div>
-
-      </header>
-
-      <!-- GRID -->
-      <div class="closet-grid" id="favoritosGrid"></div>
-
-    </main>
-
-  </div>
-
-  <script>
-
-    feather.replace();
-
-    function pegarRoupas(){
-
-      return JSON.parse(
-        localStorage.getItem('roupas')
-      ) || [];
-
-    }
-
-    function renderizarFavoritos(){
-
-      const roupas = pegarRoupas();
-
-      const favoritas =
-        roupas.filter(r => r.favorita);
-
-      const grid =
-        document.getElementById('favoritosGrid');
-
-      grid.innerHTML = '';
-
-      if(favoritas.length === 0){
-
-        grid.innerHTML = `
-
-          <div class="empty-state">
-
-            <h3>Nenhuma peça favorita</h3>
-
-            <p>
-              Favorite roupas no dashboard 
-            </p>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-      favoritas.forEach((roupa) => {
-
-        const card =
-          document.createElement('div');
-
-        card.classList.add('item-card');
-
-        card.innerHTML = `
-
-          <img src="${roupa.imagem}">
-
-          <div class="item-content">
-
-            <h3>${roupa.nome}</h3>
-
-            <div class="item-category">
-              ${roupa.categoria}
-            </div>
-
-          </div>
-
-        `;
-
-        grid.appendChild(card);
-
-      });
-
-    }
-
-    renderizarFavoritos();
-
-  </script>
-
+        renderizarFavoritos();
+    </script>
 </body>
 </html>

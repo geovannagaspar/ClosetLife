@@ -1,225 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventário | ClosetLife</title>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- FONTES -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- ÍCONES -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/feather-icons"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
-
 <div class="dashboard">
-
-  <!-- SIDEBAR -->
-
   <aside class="sidebar">
-
-    <div class="logo">
-      ClosetLife
-    </div>
-
+    <div class="logo">ClosetLife</div>
     <nav class="menu">
-
-      <a href="index.html">
-        <i data-feather="grid"></i>
-        <span>Dashboard</span>
-      </a>
-
-      <a
-        href="inventario.html"
-        class="active"
-      >
-        <i data-feather="shopping-bag"></i>
-        <span>Inventário</span>
-      </a>
-
-      <a href="agenda.html">
-        <i data-feather="calendar"></i>
-        <span>Agenda</span>
-      </a>
-
-      <a href="favoritos.html">
-        <i data-feather="heart"></i>
-        <span>Favoritos</span>
-      </a>
-
-      <a href="financeiro.html">
-        <i data-feather="dollar-sign"></i>
-        <span>Financeiro</span>
-      </a>
-
-      <a href="documentacao.html">
-        <i data-feather="book-open"></i>
-        <span>Documentação</span>
-      </a>
-
-      <a href="uml.html">
-        <i data-feather="git-branch"></i>
-        <span>UML</span>
-      </a>
-
+      <a href="index.html"><i data-feather="grid"></i><span>Dashboard</span></a>
+      <a href="inventario.html" class="active"><i data-feather="shopping-bag"></i><span>Inventário</span></a>
+      <a href="agenda.html"><i data-feather="calendar"></i><span>Agenda</span></a>
+      <a href="favoritos.html"><i data-feather="heart"></i><span>Favoritos</span></a>
+      <a href="financeiro.html"><i data-feather="dollar-sign"></i><span>Financeiro</span></a>
+      <a href="documentacao.html"><i data-feather="book-open"></i><span>Documentação</span></a>
+      <a href="uml.html"><i data-feather="git-branch"></i><span>UML</span></a>
     </nav>
-
   </aside>
-
-  <!-- MAIN -->
-
   <main class="main-content">
-
-    <!-- TOPO -->
-
     <header class="topbar">
-
-      <div>
-
-        <h1>
-          Inventário
-        </h1>
-
-        <p>
-          Todas as suas peças cadastradas
-        </p>
-
-      </div>
-
+      <div><h1>Inventário</h1><p>Todas as suas peças cadastradas</p></div>
+      <button class="add-btn" id="abrirModal">
+        <i data-feather="plus" style="width:16px; height:16px; margin-right:5px; vertical-align:middle;"></i>
+        Adicionar Peça
+      </button>
     </header>
-
-    <!-- PESQUISA -->
-
-    <input
-      type="text"
-      id="busca"
-      class="search-input"
-      placeholder="Pesquisar peça..."
-    >
-
-    <!-- GRID -->
-
-    <div
-      class="closet-grid"
-      id="inventarioGrid"
-    ></div>
-
+    <input type="text" id="busca" class="search-input" placeholder="Pesquisar peça...">
+    <div class="closet-grid" id="closetGrid"></div>
   </main>
-
 </div>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-top">
+      <h2>Nova Peça</h2>
+      <button class="close-btn" id="fecharModal"><i data-feather="x"></i></button>
+    </div>
+    <div class="form-group">
+      <label>Nome da Peça</label>
+      <input type="text" id="nomeRoupa" placeholder="Ex: Camisa Linho Branca">
+    </div>
+    <div class="form-group">
+      <label>Categoria</label>
+      <select id="categoriaRoupa">
+        <option value="">Selecione...</option>
+        <option value="Camisas">Camisas</option>
+        <option value="Calças">Calças</option>
+        <option value="Calçados">Calçados</option>
+        <option value="Acessórios">Acessórios</option>
+        <option value="Vestidos">Vestidos</option>
+        <option value="Outros">Outros</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Imagem da Peça</label><input type="file" id="imagemRoupa" accept="image/*"></div>
+    <button class="save-btn" id="salvarRoupa">Salvar no Closet</button>
+  </div>
+</div>
+<script src="script.js"></script>
 <script>
-
-  feather.replace();
-
-  function pegarRoupas(){
-
-    return JSON.parse(
-      localStorage.getItem('roupas')
-    ) || [];
-
-  }
-
-  function renderizarInventario(){
-
-    const grid =
-      document.getElementById(
-        'inventarioGrid'
-      );
-
-    const busca =
-      document.getElementById(
-        'busca'
-      ).value.toLowerCase();
-
-    const roupas =
-      pegarRoupas().filter(r =>
-        r.nome
-        .toLowerCase()
-        .includes(busca)
-      );
-
-    grid.innerHTML = '';
-
-    if(roupas.length === 0){
-
-      grid.innerHTML = `
-
-        <div class="empty-state">
-
-          <h2>
-            Nenhuma peça encontrada
-          </h2>
-
-          <p style="margin-top:10px;">
-            Tente pesquisar outro nome.
-          </p>
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-    roupas.forEach((roupa) => {
-
-      const card =
-        document.createElement('div');
-
-      card.classList.add('item-card');
-
-      card.innerHTML = `
-
-        <img src="${roupa.imagem}">
-
-        <div class="item-content">
-
-          <h3>
-            ${roupa.nome}
-          </h3>
-
-          <div class="item-category">
-            ${roupa.categoria}
-          </div>
-
-        </div>
-
-      `;
-
-      grid.appendChild(card);
-
+  feather.replace( );
+  document.getElementById('busca').addEventListener('input', (e) => {
+    const termo = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('.item-card');
+    cards.forEach(card => {
+      const nome = card.querySelector('h3').textContent.toLowerCase();
+      const categoria = card.querySelector('.item-category').textContent.toLowerCase();
+      card.style.display = (nome.includes(termo) || categoria.includes(termo)) ? 'block' : 'none';
     });
-
-  }
-
-  document
-    .getElementById('busca')
-    .addEventListener(
-      'input',
-      renderizarInventario
-    );
-
-  renderizarInventario();
-
+  });
 </script>
-
 </body>
 </html>

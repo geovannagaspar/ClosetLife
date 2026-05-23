@@ -12,10 +12,8 @@
 
   <title>UML | ClosetLife</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- FONTES -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -26,7 +24,6 @@
     rel="stylesheet"
   />
 
-  <!-- ÍCONES -->
   <script src="https://unpkg.com/feather-icons"></script>
 
 </head>
@@ -34,8 +31,6 @@
 <body>
 
 <div class="dashboard">
-
-  <!-- SIDEBAR -->
 
   <aside class="sidebar">
 
@@ -87,8 +82,6 @@
 
   </aside>
 
-  <!-- MAIN -->
-
   <main class="main-content">
 
     <header class="topbar">
@@ -117,13 +110,11 @@
 
       <p style="line-height:1.9;">
 
-        O ClosetLife é um sistema web desenvolvido
-        para gerenciamento digital de roupas,
-        favoritos, agenda e organização pessoal.
+        O ClosetLife é uma aplicação web desenvolvida para gerenciamento digital de roupas, favoritos, agenda pessoal e controle financeiro relacionado ao closet.
 
-        O objetivo da modelagem UML é representar
-        visualmente a estrutura, os fluxos e
-        os componentes do sistema.
+        A modelagem UML foi utilizada para representar visualmente os componentes, funcionalidades, estruturas e fluxos do sistema, facilitando compreensão, organização e manutenção da aplicação.
+
+        Os diagramas apresentados auxiliam na documentação técnica do projeto e demonstram a arquitetura lógica adotada durante o desenvolvimento.
 
       </p>
 
@@ -163,18 +154,24 @@
 
       <div class="empty-state">
 
-        <p style="line-height:2;">
+<pre style="line-height:2; text-align:left; white-space:pre-wrap;">
 
-          👤 Usuário <br><br>
+                 +------------------+
+                 |    Usuário      |
+                 +------------------+
 
-          • Adicionar roupas <br>
-          • Remover roupas <br>
-          • Favoritar peças <br>
-          • Visualizar agenda <br>
-          • Acessar financeiro <br>
-          • Gerenciar inventário <br>
+        |-------------------------------|
 
-        </p>
+        • Cadastrar roupas
+        • Editar peças
+        • Remover roupas
+        • Favoritar itens
+        • Gerenciar inventário
+        • Visualizar agenda
+        • Acessar financeiro
+        • Navegar entre páginas
+
+</pre>
 
       </div>
 
@@ -190,54 +187,47 @@
 
       <div class="empty-state">
 
-        <h3 style="margin-bottom:15px;">
-          Classe: Roupa
-        </h3>
+<pre style="line-height:2; text-align:left; white-space:pre-wrap;">
 
-        <p style="line-height:2;">
++------------------------------------------------+
+|                   Classe Roupa                 |
++------------------------------------------------+
+| - id                                           |
+| - nome                                         |
+| - categoria                                    |
+| - imagem                                       |
+| - favorita                                     |
++------------------------------------------------+
+| + adicionarRoupa()                             |
+| + removerRoupa()                               |
+| + editarRoupa()                                |
++------------------------------------------------+
 
-          + nome <br>
-          + categoria <br>
-          + imagem <br>
-          + favorita <br>
 
-        </p>
++------------------------------------------------+
+|                 Classe Agenda                  |
++------------------------------------------------+
+| - data                                         |
+| - horario                                      |
+| - evento                                       |
++------------------------------------------------+
+| + adicionarEvento()                            |
+| + removerEvento()                              |
++------------------------------------------------+
 
-      </div>
 
-      <br>
++------------------------------------------------+
+|               Classe Financeiro                |
++------------------------------------------------+
+| - valor                                        |
+| - categoria                                    |
+| - descricao                                    |
++------------------------------------------------+
+| + adicionarRegistro()                          |
+| + calcularSaldo()                              |
++------------------------------------------------+
 
-      <div class="empty-state">
-
-        <h3 style="margin-bottom:15px;">
-          Classe: Agenda
-        </h3>
-
-        <p style="line-height:2;">
-
-          + data <br>
-          + horário <br>
-          + evento <br>
-
-        </p>
-
-      </div>
-
-      <br>
-
-      <div class="empty-state">
-
-        <h3 style="margin-bottom:15px;">
-          Classe: Financeiro
-        </h3>
-
-        <p style="line-height:2;">
-
-          + valor <br>
-          + categoria <br>
-          + descrição <br>
-
-        </p>
+</pre>
 
       </div>
 
@@ -253,19 +243,31 @@
 
       <div class="empty-state">
 
-        <p style="line-height:2;">
+<pre style="line-height:2; text-align:left; white-space:pre-wrap;">
 
-          Usuário adiciona roupa <br>
-          ↓ <br>
-          Interface recebe dados <br>
-          ↓ <br>
-          JavaScript processa <br>
-          ↓ <br>
-          LocalStorage salva <br>
-          ↓ <br>
-          Inventário atualiza <br>
+Usuário
+   |
+   | Preenche formulário
+   v
 
-        </p>
+Interface HTML
+   |
+   | Envia dados
+   v
+
+JavaScript
+   |
+   | Processa informações
+   v
+
+LocalStorage
+   |
+   | Salva dados
+   v
+
+Inventário Atualizado
+
+</pre>
 
       </div>
 
@@ -281,21 +283,29 @@
 
       <div class="empty-state">
 
-        <p style="line-height:2;">
+<pre style="line-height:2; text-align:left; white-space:pre-wrap;">
 
-          Início <br>
-          ↓ <br>
-          Usuário acessa sistema <br>
-          ↓ <br>
-          Escolhe funcionalidade <br>
-          ↓ <br>
-          Adiciona roupa <br>
-          ↓ <br>
-          Sistema salva alterações <br>
-          ↓ <br>
-          Fim <br>
+[ Início ]
+      |
+Usuário acessa sistema
+      |
+Seleciona funcionalidade
+      |
+Preenche informações
+      |
+Validação dos dados
+      |
+Dados válidos?
+   /        \
+ Sim        Não
+  |           |
+Salvar     Exibir erro
+  |
+Atualizar interface
+  |
+[ Final ]
 
-        </p>
+</pre>
 
       </div>
 
@@ -308,6 +318,12 @@
       <h2 style="margin-bottom:18px;">
         6. Diagrama de Componentes
       </h2>
+
+      <p style="line-height:1.9; margin-bottom:20px;">
+
+        O diagrama de componentes representa a divisão estrutural do sistema, demonstrando as principais tecnologias responsáveis pela interface, processamento lógico e persistência de dados.
+
+      </p>
 
       <table style="width:100%; line-height:2;">
 
@@ -391,8 +407,8 @@ Responsável pelas funcionalidades do sistema.
 [Browser Storage]
 Armazena roupas, favoritos e agenda.
 
-📦 ClosetLife System
-[SYSTEM]
+📦 ClosetLife Web Application
+[System]
 
 Utiliza
 [HTML/CSS]
@@ -423,6 +439,12 @@ Atualiza Dados
         8. Resumo da Modelagem UML
       </h2>
 
+      <p style="line-height:1.9; margin-bottom:20px;">
+
+        Os diagramas UML desenvolvidos para o ClosetLife auxiliam na representação estrutural e comportamental do sistema, permitindo melhor compreensão da arquitetura e das funcionalidades implementadas.
+
+      </p>
+
       <table style="width:100%; line-height:2;">
 
         <tr>
@@ -441,7 +463,7 @@ Atualiza Dados
 
           <td>Casos de Uso</td>
 
-          <td>Representar funcionalidades</td>
+          <td>Representar funcionalidades do sistema</td>
 
         </tr>
 
@@ -449,7 +471,7 @@ Atualiza Dados
 
           <td>Classes</td>
 
-          <td>Estrutura do sistema</td>
+          <td>Representar estrutura e organização</td>
 
         </tr>
 
@@ -457,7 +479,7 @@ Atualiza Dados
 
           <td>Sequência</td>
 
-          <td>Fluxo das operações</td>
+          <td>Demonstrar fluxo das operações</td>
 
         </tr>
 
@@ -465,7 +487,7 @@ Atualiza Dados
 
           <td>Atividade</td>
 
-          <td>Fluxos do sistema</td>
+          <td>Representar processos e ações</td>
 
         </tr>
 
@@ -473,7 +495,7 @@ Atualiza Dados
 
           <td>Componentes</td>
 
-          <td>Arquitetura geral</td>
+          <td>Demonstrar arquitetura do sistema</td>
 
         </tr>
 
@@ -491,15 +513,15 @@ Atualiza Dados
 
       <ul style="line-height:2; padding-left:20px;">
 
-        <li>Melhor organização do projeto</li>
+        <li>Melhor organização estrutural do sistema</li>
 
-        <li>Facilidade de manutenção</li>
+        <li>Facilidade de manutenção e evolução futura</li>
 
-        <li>Documentação visual do sistema</li>
+        <li>Documentação visual das funcionalidades</li>
 
-        <li>Maior clareza na estrutura</li>
+        <li>Maior clareza na arquitetura do projeto</li>
 
-        <li>Facilidade para futuras melhorias</li>
+        <li>Auxílio na comunicação entre desenvolvimento e documentação</li>
 
       </ul>
 
